@@ -2,19 +2,21 @@
   "name": "@example/basics",
   "version": "0.0.1",
   "private": true,
-  "type": "module",
   "scripts": {
-    "init": "astro dev",
+    "init": "yarn && sequelize db:migrate && sequelize db:seed:all",
     "dev": "astro dev",
-    "start": "astro build && node app.js"
+    "build": "yarn && astro build && node app.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^1.0.1",
     "@astrojs/solid-js": "^1.1.0",
     "@astrojs/tailwind": "^1.0.0",
+    "argon2": "^0.29.1",
     "astro": "^1.2.1",
     "express": "^4.18.1",
     "path-to-regexp": "^6.2.1",
-    "solid-js": "^1.4.3"
+    "sequelize": "^6.21.6",
+    "solid-js": "^1.4.3",
+    "sqlite3": "^5.0.11"
   }
 }
