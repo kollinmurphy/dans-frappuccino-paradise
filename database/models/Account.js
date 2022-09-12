@@ -1,8 +1,8 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+
+import { Model } from 'sequelize'
+
+const Account = (sequelize, DataTypes) => {
   class Account extends Model {
     static associate(models) {
       // TODO define association here
@@ -37,3 +37,5 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Account;
 };
+
+export default Account

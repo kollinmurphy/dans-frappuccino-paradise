@@ -1,0 +1,17 @@
+---
+import { Account } from '@database'
+
+const users = await Account.findAll()
+
+// if (!product) {
+//   return new Response(null, {
+//     status: 404,
+//     statusText: 'Not found'
+//   });
+// }
+---
+<html>
+  <body>
+    {users.map(u => <div>{JSON.stringify(u)}</div>)}
+  </body>
+</html>

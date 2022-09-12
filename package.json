@@ -5,7 +5,7 @@
   "scripts": {
     "init": "yarn && sequelize db:migrate && sequelize db:seed:all",
     "dev": "astro dev",
-    "build": "yarn && astro build && node app.mjs"
+    "build": "astro build && node app.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^1.0.1",
