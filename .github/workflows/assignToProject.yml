@@ -21,3 +21,4 @@ jobs:
       if: github.event.action == 'opened'
       with:
         project: 'https://github.com/users/kollinmurphy/projects/1'
+        column_name: 'Todo'
