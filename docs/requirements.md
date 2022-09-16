@@ -1,5 +1,15 @@
 # Requirements Definition
 
+## Introduction and Context
+
+Dan has opened up a frappuccino restaurant and is in need of software to serve as a multi\-purpose management and sales system for all sales and store activity to go through\. This project aims to create a system to allow users of all roles to efficiently do what they need to do at the restaurant\.
+
+Customers and Employees will be able to make orders from an assortment of customizable drinks\. When purchasing, customers will be able to pick them up with ease\. Similarly for employees, creating orders will add them to the queue for baristas to prepare\. They also have the ability to log their work hours within the same system\.
+
+It will allow the manager/store owner to order inventory and keep track of items in stock, pricing, employees, store balance, and work hours\. They have the ability to create, edit, and remove employees that can be paid for their work time based on their flat rate of $15/hour\. 
+
+By giving all users an easy way to get what they need out of Dan’s Frappuccino Paradise, the multi\-user software will help customers, employees, and managers alike in achieving a good frappuccino experience\.
+
 ## Functional Requirements
 
 1. __Authentication__
@@ -120,4 +130,6 @@
 	6. 1 Manager \(Username: ‘dan’, Password: ‘password123’, Balance: $0\)
 	7. 1 Employee \(Username: ‘employee’, Password: ‘password123’, Balance: $0\)
 	8. 1 User \(Username: ‘user’, Password: ‘password123’, Balance: $10\)
+
+## Glossary
 
