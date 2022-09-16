@@ -5,7 +5,7 @@
 1. __Authentication__
 	1. Available views are determined by the Account Role
 		1. Visitors to the site must have an Account prior to accessing any pages other than sign in or create account
-	2. Authentication state is maintained across site visits using localStorage to save an authorization token
+	2. Authentication state is maintained across site visits using a cookie to save an authorization token
 	3. Account Usernames are not case sensitive
 	4. Account Passwords are encrypted
 	5. Account Passwords have a minimum character count of 8
@@ -52,7 +52,7 @@
 
 ## Non-functional Requirements
 
-1. __Orders__
+6. __Orders__
 	1. The price of an OrderProduct is calculated as follows:where *size* is 1 for small, 2 for medium, and 3 for large; *modifier* is percentPriceModifier; *base* is smallBasePrice, mediumBasePrice, or largeBasePrice
 	2. The price of an Order is the sum of all of its OrderProducts
 	3. Failure conditions of an order
@@ -64,7 +64,7 @@
 		3. The Order is marked as Paid
 		4. The QuantityOnHand is decremented for each ProductIngredient and each OrderAddOn
 			1. The quantity to deduct is scaled by the Product size: 1 for small, 2 for medium, 3 for large
-2. __The project will employ a database with the following entities:__
+7. __The project will employ a database with the following entities:__
 	1. StoreConfig
 		1. Key \(string\)
 		2. Value \(float\)
@@ -109,7 +109,7 @@
 		1. AccountId
 		2. HoursWorked
 		3. Paid \(boolean default false\)
-3. __The project will contain an initialization setup script which seeds the database with the following:__
+8. __The project will contain an initialization setup script which seeds the database with the following:__
 	1. StoreConfig \(Key: ‘balance’, Value: 10000\)
 	2. StoreConfig \(Key: ‘percentPriceModifier’, Value: 1\.50\)
 	3. StoreConfig \(Key: ‘smallBasePrice’, Value: 2\.00\)
