@@ -1,15 +1,3 @@
-Astro \(backend & SSR\) \+ Solid / Vue / React \(frontend\)
-
-- Pros:
-	- Cutting\-edge technology
-	- Super duper fast
-	- The majority of the site is pure HTML \(probably with the addition of TailwindCSS to make it easier\)
-	- Easy to learn
-	- Can use any UI framework \(Solid, Vue, React, Preact, Svelte, etc\.\)
-		- Can also mix\-and\-match even within the project
-	- Shows a lot of initiative on a resume
-	- The API can be implemented using Astro, which is super intuitive
-
 # __Project Plan__
 
 __Project Summary__

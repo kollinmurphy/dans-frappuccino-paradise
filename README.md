@@ -1,9 +1,14 @@
-## Readme.md
 
-
-## Dan's Frappuccino Paradise
+# Dan's Frappuccino Paradise
 
 This is a web app designed to facilitate multiple aspects of a standard coffee shop experience in a digital environment.
+
+### Related Documentation
+
+- [Project Plan](docs/projectPlan.md)
+- [Requirements Definition](docs/requirements.md)
+- [Use Case Diagrams](docs/useCases.md)
+
 
 ## Workspace Layout
 
@@ -18,8 +23,22 @@ During development we will work primarily on feature branches which will merge b
 
 ## Tool Stack
 
-This project uses Astro as a Server Side Renderer and SolidJS as a front-end framework. Additionally, we
-utilize a SQLite database and the Sequelize ORM.
+This project uses Astro as a Server Side Renderer and SolidJS as a front-end framework. Additionally, we utilize a SQLite database and the Sequelize ORM.
+
+- Pros:
+  - Cutting\-edge technology
+  - Super duper fast
+  - The majority of the site is pure HTML \(with the addition of TailwindCSS and DaisyUI to make it easier\)
+  - Easy to learn
+  - Can use any UI framework \(Solid, Vue, React, Preact, Svelte, etc\.\)
+    - Can also mix\-and\-match even within the project
+  - Shows a lot of initiative on a resume
+  - The API can be implemented using Astro, which is super intuitive
+- Cons:
+  - Little experience within the group
+    - *Flip-side*: None of us have significant experience with Django or any other framework.
+  - Limited documentation & examples
+    - *Flip-side*: There is a lot of documentation for the UI framework(s) we decide to use, which is where most of our effort will be spent.
 
 ## Setup Procedure
 
@@ -42,13 +61,3 @@ The unit tests address several commonly identified uses including those found in
 
 
 ## Other development notes, as needed
-
-
-
-## Also See
-
-[Project Plan](docs/projectPlan.md)
-
-[Requirements Definition](docs/requirements.md)
-
-[Use Case Diagrams](docs/useCases.md)
