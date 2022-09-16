@@ -45,4 +45,4 @@ Since we are building what is in essence a proof of concept project that won’t
 
 __Reference to the README\.md__
 
-Refer to the README for more info
+Refer to the [README.md](/README.md) for more info

@@ -49,3 +49,6 @@ The unit tests address several commonly identified uses including those found in
 
 [Project Plan](docs/projectPlan.md)
 
+[Requirements Definition](docs/requirements.md)
+
+[Use Case Diagrams](docs/useCases.md)
