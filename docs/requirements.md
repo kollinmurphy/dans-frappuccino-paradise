@@ -131,6 +131,12 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 	7. 1 Employee \(Username: ‘employee’, Password: ‘password123’, Balance: $0\)
 	8. 1 User \(Username: ‘user’, Password: ‘password123’, Balance: $10\)
 
+## Future Features
+
+1. Deploy to Netlify to allow anyone around the globe to order our delicious fraps.
+2. Allow purchasing a drink as a guest (without a login).
+3. Implementing an integration with Stripe to use actual currency.
+
 ## Glossary
 
 This section explains important terms and definitions.

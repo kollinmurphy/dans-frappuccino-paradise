@@ -1,16 +1,4 @@
-# Use Cases
-
-__1\. Introduction and Context__
-
-Dan has opened up a frappuccino restaurant and is in need of software to serve as a multi\-purpose management and sales system for all sales and store activity to go through\. This project aims to create a system to allow users of all roles to efficiently do what they need to do at the restaurant\.
-
-Customers and Employees will be able to make orders from an assortment of customizable drinks\. When purchasing, customers will be able to pick them up with ease\. Similarly for employees, creating orders will add them to the queue for baristas to prepare\. They also have the ability to log their work hours within the same system\.
-
-It will allow the manager/store owner to order inventory and keep track of items in stock, pricing, employees, store balance, and work hours\. They have the ability to create, edit, and remove employees that can be paid for their work time based on their flat rate of $15/hour\. 
-
-By giving all users an easy way to get what they need out of Dan’s Frappuccino Paradise, the multi\-user software will help customers, employees, and managers alike in achieving a good frappuccino experience\.
-
-__2\. Users and their Goals__
+# Users and their Goals
 
 *Figure 1 \- User attempts access of the application*
 
@@ -39,6 +27,8 @@ Event flow:
 	2. Employee home
 	3. Manager home
 
+
+
 *Figure 2 \- Customer creates account*
 
 ![diagram2](diagrams/diagram2.png)
@@ -60,6 +50,8 @@ Event Flow:
 - System inquiries user information \(username, password, role\)
 - Allow user into application with role\-based permissions 
 
+
+
 *Figure 3 \- Customer places an order*
 
 ![diagram3](diagrams/diagram3.png)
@@ -79,6 +71,8 @@ Event Flow:
 - User logs in
 - System displays drink options for them to customize
 - Customer purchases a drink, depleting their balance and receiving confirmation 
+
+
 
 *Figure 4 \- Customer cancels order*
 
@@ -101,6 +95,8 @@ Event Flow:
 - They select an order to cancel
 - If it isn’t already finished, the order is removed from the system
 
+
+
 *Figure 5 \- Manager distributes money*
 
 ![diagram5](diagrams/diagram5.png)
@@ -120,6 +116,8 @@ Event Flow:
 - Manger logs in 
 - They select an employee
 - Approve work hours and they are paid based on their wage
+
+
 
 *Figure 6 \-  Manager orders items for inventory*
 
@@ -141,6 +139,8 @@ Event Flow:
 - They select quantity of items
 - Confirm order, values of QuantityOnHand per ProductIngredient increase\.
 
+
+
 *Figure 7 \- Employee marks order as fulfilled*
 
 ![diagram7](diagrams/diagram7.png)
@@ -160,6 +160,8 @@ Event Flow:
 - Employee logs in
 - They locate and select the completed order
 - Mark it as fulfilled, database changes to reflect 
+
+
 
 *Figure 8 \- Employee tracks work hours*
 
