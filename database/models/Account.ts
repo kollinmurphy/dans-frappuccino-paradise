@@ -1,11 +1,19 @@
 'use strict';
 
-import { Model } from 'sequelize'
+import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from 'sequelize'
 
-const Account = (sequelize, DataTypes) => {
-  class Account extends Model {
-    static associate(models) {
-      // TODO define association here
+const Account = (sequelize: Sequelize) => {
+  class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Account>> {
+    declare username: string;
+    declare password: string;
+    declare role: 'manager' | 'employee' | 'user';
+    declare balance: number;
+    declare isDeleted: boolean;
+    declare createdAt: Date;
+    declare updatedAt: Date;
+
+    static associate(models: any) {
+      
     }
   }
   Account.init({
@@ -31,6 +39,8 @@ const Account = (sequelize, DataTypes) => {
       defaultValue: false,
       allowNull: false,
     },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'Account',

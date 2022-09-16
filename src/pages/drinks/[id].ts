@@ -1,5 +1,8 @@
-export async function get({ request, params }) {
-  const { id } = params;
+import { APIContext, APIRoute } from "astro";
+
+export const get: APIRoute = ({ request, params }) => {
+  const { id } = params as { id: string };
+
   const product = {
     id: parseInt(id, 10),
     name: 'stuff',
