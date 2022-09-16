@@ -133,3 +133,13 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 
 ## Glossary
 
+This section explains important terms and definitions.
+
+
+*Customer* - a user who wishes to purchase drinks with the available customization options
+
+*Employee* - a user that receives money for work hours and can make orders on behalf of customers 
+
+*Manager* - the superuser with total access that can order inventory, pay and edit employees, and manage the store balance
+
+*User* - any of the four types of users of Dan's system
