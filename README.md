@@ -14,9 +14,18 @@ This is a web app designed to facilitate multiple aspects of a standard coffee s
 
 The web app will be stored in this repository.
 
+## Organization
+
+Team Members:
+
+- John Belnap
+- Caden Harris
+- Trenton Peters
+- Kollin Murphy
+
 ## Version-Control Procedures
 
-Team members should clone the app in Kollin’s account of the project "**[dans-frappuccino-paradise](https://github.com/kollinmurphy/dans-frappuccino-paradise)**".  
+Team members should clone the repository in Kollin’s account of the project "**[dans-frappuccino-paradise](https://github.com/kollinmurphy/dans-frappuccino-paradise)**".  
 Before each meeting, collaborators should submit a pull request so we can monitor progress and discuss issues.
 After making any significant change, team members should notify the team for feedback.
 During development we will work primarily on feature branches which will merge back into master.
