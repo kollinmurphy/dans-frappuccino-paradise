@@ -29,7 +29,18 @@ We plan to meet, either physically or virtually, at least once a week\. Our prim
 
 __Risk analysis__
 
-Since we are building what is in essence a proof of concept project that won’t really be deployed, the main risk is that we don’t complete the project to the required specification and our grades suffer as a result\. To mitigate this, we will set achievable and timely goals that will allow us to complete the project in time\.
+Since we are building what is in essence a proof of concept project that won’t really be deployed, the main risk is that we don’t complete the project to the required specification and our grades suffer as a result. To mitigate this, we will set achievable and timely goals that will allow us to complete the project in time.
+
+In terms of the risk associated with the individual sections of the project:
+
+Database
+- The database is essentially the heart of the assignment, so while the likelihood that it will fail is low, we do need to be careful as any consequences here have the potential to break the entire project.
+
+Login
+- Login is also important, as the access to any individual page is determined solely by the user’s account. Some of us have experience, so the likelihood of error is lower, but again we need to make sure that this system is solid.
+
+UI
+- All of us have experience in HTML, which is a large portion of how the website will be built. Because of that, risk is relatively low with consequences that are fairly easy to resolve.
 
 __Reference to the README\.md__
 
