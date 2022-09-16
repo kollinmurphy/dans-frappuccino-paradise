@@ -28,7 +28,9 @@
 	1. The User Home is accessible by an Account of any Role
 	2. This page presents the user with a list of their orders, sorted by createdAt descending
 		1. OrderProducts are listed below each order
-		2. There is a dropdown menu next to each OrderProduct, which presents the option to favorite it
+		2. There is a dropdown menu next to each OrderProduct, which presents some options to:
+		   1. Favorite it, which will automatically add it the favorite orders on the same page
+		   2. Cancel the order, which will refund the money to their account and mark the order as cancelled
 	3. This page also presents a numeric entry from which the user can add funds to their Balance
 	4. This page also has a list of favorite drinks, which can be easily reordered
 		1. When an Order is favorited / unfavorited, this list should dynamically update
@@ -97,7 +99,7 @@
 	7. Order
 		1. AccountId
 		2. Paid \(boolean default false\)
-		3. Fulfilled \(boolean default false\)
+		3. Status (Created | Cancelled | Fulfilled)
 	8. OrderProduct
 		1. OrderId
 		2. ProductId
