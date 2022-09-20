@@ -1,9 +1,9 @@
 {
-  "name": "@example/basics",
+  "name": "@awesomeeight/dans-frappuccino-paradise",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "init": "yarn && sequelize db:migrate && sequelize db:seed:all",
+    "init": "npm install && sequelize db:migrate && sequelize db:seed:all",
     "dev": "astro dev",
     "build": "astro build && node app.mjs"
   },
