@@ -3,7 +3,18 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@database": ["database"]
-    }
+      "@database": ["database"],
+      "@api/*": ["src/pages/api/*"],
+      "@components/*": ["src/components/*"],
+      "@data/*": ["src/data/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"],
+    },
+    "noEmit": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "ESNext"
   }
 }
