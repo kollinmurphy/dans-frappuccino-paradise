@@ -1,0 +1,14 @@
+---
+import SignInForm from '@components/SignInForm'
+import Layout from '@layouts/Layout.astro';
+import { authenticate } from '@utils/auth';
+
+const account = authenticate(Astro.request)
+if (account)
+  return Astro.redirect('/account')
+---
+
+<Layout title='Login'>
+  <h1>Sign In</h1>
+  <SignInForm client:idle />
+</Layout>

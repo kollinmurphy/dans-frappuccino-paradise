@@ -9,6 +9,7 @@
       "@data/*": ["src/data/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
+      "@utils/*": ["src/utils/*"],
     },
     "noEmit": true,
     "isolatedModules": true,

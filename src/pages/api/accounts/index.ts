@@ -1,6 +1,7 @@
 import db from "@database";
 import { hash } from "argon2";
-import wrapper, { Handler } from "@api/wrapper";
+import wrapper, { Handler } from "@utils/wrapper";
+import { createToken } from "@utils/auth";
 
 type CreateUserInput = {
   username: string;
@@ -14,7 +15,11 @@ const createUser: Handler<CreateUserInput> = async ({ body }) => {
     password: await hash(password),
     role: 'user',
   })
-  return account
+  const { password: _, ...userData } = account.get({ plain: true })
+  return {
+    ...userData,
+    token: createToken(userData),
+  }
 }
 
 export const post = wrapper(createUser)

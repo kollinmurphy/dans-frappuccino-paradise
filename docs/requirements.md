@@ -68,7 +68,8 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 	1. The price of an OrderProduct is calculated as follows:
 	   
 	   ![Order Price Calculation](diagrams/orderPriceCalculation.png)
-	   where *size* is 1 for small, 2 for medium, and 3 for large; *modifier* is percentPriceModifier; *base* is smallBasePrice, mediumBasePrice, or largeBasePrice; *ingredients* are the associated OrderProductIngredients
+	   
+		 where *size* is 1 for small, 2 for medium, and 3 for large; *modifier* is percentPriceModifier; *base* is smallBasePrice, mediumBasePrice, or largeBasePrice; *ingredients* are the associated OrderProductIngredients
 	   
 	2. The price of an Order is the sum of all of its OrderProducts
 	

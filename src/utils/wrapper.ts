@@ -41,7 +41,6 @@ const wrapper: (handler: Handler<any>) => APIRoute =
     let body: object = {};
     try {
       body = await request.json();
-      console.log(body);
     } catch (err) {
       console.error("Body is not a valid JSON");
     }
