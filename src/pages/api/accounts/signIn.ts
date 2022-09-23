@@ -11,7 +11,7 @@ type LoginInput = {
 const login: Handler<LoginInput> = async ({ body }) => {
   const { username, password } = body
   const account = await db.Account.findOne({
-    where: { username },
+    where: { username, isDeleted: false },
   })
   if (!account)
     throw new NotFoundError('Unable to find account')
