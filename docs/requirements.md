@@ -66,20 +66,23 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 
 6. **Orders**
 	1. The price of an OrderProduct is calculated as follows:
-	   $$
-	   Price = (\sum_{ingredient}price) \;*\; size \;*\; modifier \;+\; base
-	   $$
+	   
+	   ![Order Price Calculation](diagrams/orderPriceCalculation.png)
 	   where *size* is 1 for small, 2 for medium, and 3 for large; *modifier* is percentPriceModifier; *base* is smallBasePrice, mediumBasePrice, or largeBasePrice; *ingredients* are the associated OrderProductIngredients
+	   
 	2. The price of an Order is the sum of all of its OrderProducts
+	
 	3. Failure conditions of an order
-		1. Whenever an Order fails to be paid, it should not be deleted or modified
-		2. When the Account’s Balance is less than the calculated Order total, an error message is displayed informing the user that they have insufficient funds
+	  1. Whenever an Order fails to be paid, it should not be deleted or modified
+	  2. When the Account’s Balance is less than the calculated Order total, an error message is displayed informing the user that they have insufficient funds
+	
 	4. Actions to take upon successful payment
-		1. A Transaction is created
-		2. The Account’s Balance is deducted by the Order Price
-		3. The Order is marked as Paid
-		4. The QuantityOnHand is decremented for each ProductIngredient and each OrderAddOn
-			1. The quantity to deduct is scaled by the Product size: 1 for small, 2 for medium, 3 for large
+	  1. A Transaction is created
+	  2. The Account’s Balance is deducted by the Order Price
+	  3. The Order is marked as Paid
+	  4. The QuantityOnHand is decremented for each ProductIngredient and each OrderAddOn
+	  	1. The quantity to deduct is scaled by the Product size: 1 for small, 2 for medium, 3 for large
+	
 7. **The project will employ a database with the following entities (see UML diagrams for more information):**
 	
 	1. **StoreConfig**
@@ -127,6 +130,7 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 		1. **accountId** (int)
 		2. hoursWorked (int)
 		3. paid \(boolean default false\)
+	
 8. **The project will contain an initialization setup script which seeds the database with the following:**
 	1. StoreConfig \(key: ‘balance’, value: 10000\)
 	2. StoreConfig \(key: ‘percentPriceModifier’, value: 1\.50\)
