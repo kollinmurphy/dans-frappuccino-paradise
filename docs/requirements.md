@@ -129,7 +129,7 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 	9. **Hours**
 		1. *id* (int)
 		1. **accountId** (int)
-		2. hoursWorked (int)
+		2. minutesWorked (int)
 		3. paid \(boolean default false\)
 	
 8. **The project will contain an initialization setup script which seeds the database with the following:**
