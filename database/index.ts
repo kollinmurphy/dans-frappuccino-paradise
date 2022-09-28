@@ -11,9 +11,11 @@ import AccountModel from './models/Account';
 import HoursModel from './models/Hours';
 import ProductModel from './models/Product'
 
+export const Product = ProductModel(sequelize)
 export const Account = AccountModel(sequelize)
 export const Hours = HoursModel(sequelize)
-export const Product = ProductModel(sequelize)
+export const Order = OrderModel(sequelize)
+export const StoreConfig = StoreConfigModel(sequelize);
 
 const db = { Account, Hours, Product, sequelize }
 
