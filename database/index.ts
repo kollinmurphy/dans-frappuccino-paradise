@@ -9,11 +9,13 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 import AccountModel from './models/Account';
 import HoursModel from './models/Hours';
+import ProductModel from './models/Product'
 
 export const Account = AccountModel(sequelize)
 export const Hours = HoursModel(sequelize)
+export const Product = ProductModel(sequelize)
 
-const db = { Account, Hours, sequelize }
+const db = { Account, Hours, Product, sequelize }
 
 Account.associate(db)
 
