@@ -8,6 +8,11 @@ This is a web app designed to facilitate multiple aspects of a standard coffee s
 - [Project Plan](docs/projectPlan.md)
 - [Requirements Definition](docs/requirements.md)
 - [Use Case Diagrams](docs/useCases.md)
+- [Class Diagrams](docs/classDiagram.md)
+
+
+### Prior Documentation
+
 - [Milestone 1 Combined Document](docs/milestone1.pdf)
 
 
