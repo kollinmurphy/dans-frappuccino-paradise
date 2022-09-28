@@ -9,9 +9,11 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 import AccountModel from './models/Account';
 import HoursModel from './models/Hours';
+import StoreConfigModel from './models/StoreConfig';
 
 export const Account = AccountModel(sequelize)
 export const Hours = HoursModel(sequelize)
+export const StoreConfig = StoreConfigModel(sequelize);
 
 const db = { Account, Hours, sequelize }
 
