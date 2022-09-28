@@ -13,7 +13,7 @@ const Account = (sequelize: Sequelize) => {
     declare updatedAt: Date;
 
     static associate(models: any) {
-      
+      models.Account.hasMany(models.Hours)
     }
   }
   Account.init({

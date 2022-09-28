@@ -8,9 +8,12 @@ const config = configFile[env];
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 import AccountModel from './models/Account';
-export const Account = AccountModel(sequelize)
+import HoursModel from './models/Hours';
 
-const db = { Account, sequelize }
+export const Account = AccountModel(sequelize)
+export const Hours = HoursModel(sequelize)
+
+const db = { Account, Hours, sequelize }
 
 Account.associate(db)
 

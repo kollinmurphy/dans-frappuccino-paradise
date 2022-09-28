@@ -25,7 +25,7 @@ We will use Unified Modeling Language \(UML\) to document user goals, structural
 
 __Communication Policy__
 
-We plan to meet, either physically or virtually, at least once a week\. Our primary method of communication will be via discord, where we already have a group set up and have met\. When we meet, we will go over what we have completed over the last week and what we plan to accomplish over the next week\. This Once a week minimum doesn’t mean that we aren’t able to ask questions and request assistance throughout the week\.
+We plan to meet, either physically or virtually, at least twice a week\. Our primary method of communication will be via discord, where we already have a group set up and have met\. When we meet, we will go over what we have completed over the last week and what we plan to accomplish over the next week\. This twice a week minimum doesn’t mean that we aren’t able to ask questions and request assistance throughout the week\.
 
 __Risk analysis__
 

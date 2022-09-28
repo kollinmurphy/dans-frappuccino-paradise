@@ -8,6 +8,12 @@ This is a web app designed to facilitate multiple aspects of a standard coffee s
 - [Project Plan](docs/projectPlan.md)
 - [Requirements Definition](docs/requirements.md)
 - [Use Case Diagrams](docs/useCases.md)
+- [Class Diagrams](docs/classDiagram.md)
+- [Prototypes](docs/prototypes.md)
+
+
+### Prior Documentation
+
 - [Milestone 1 Combined Document](docs/milestone1.pdf)
 
 
@@ -54,6 +60,7 @@ This project uses Astro as a Server Side Renderer and SolidJS as a front-end fra
 
 1. Make sure you have `node` installed.
 2. Clone the repo, `cd` into it, and run `npm run init`. This will initialize a SQLite database with the proper schema and seed it with some initial data, including the users `dan`, `employee`, and `user`, each with the password `password123`.
+3. You can run the site in development mode using `npm run start`.
 
 ## Build Instructions
 
@@ -66,8 +73,8 @@ The unit tests address several commonly identified uses including those found in
 ## System Testing Instructions
 
 1.  Make sure you have `node` installed: [node](https://nodejs.org/en/).
-2.  Clone the repo, `cd` into it, and run `npm run init`. This will initialize an SQLite database with the proper schema and seed it with some initial data, including the users `manager`, `employee`, and `user`@@@@, each with the password `password123`.
-3. Run `npm run build`. This will start up a server on port 8080. View the front-end in the browser at `http://localhost:8080`. The current user types are @@@@, and the testing password for each one is:  `password123`.
+2.  Clone the repo, `cd` into it, and run `npm run init`. This will initialize an SQLite database with the proper schema and seed it with some initial data, including the users `dan`, `employee`, and `user`, each with the password `password123`.
+3. Run `npm run build`. This will start up a server on port 8080. View the front-end in the browser at `http://localhost:8080`. The current user types are `manager`, `employee`, `user`.
 
 
 ## Other development notes, as needed

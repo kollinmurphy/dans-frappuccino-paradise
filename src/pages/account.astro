@@ -1,0 +1,13 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { authenticate } from "@utils/auth";
+import SignOutButton from "@components/SignOutButton";
+
+const account = authenticate(Astro.request);
+if (!account) return Astro.redirect("/signin");
+---
+
+<Layout title="Account">
+  <h1>Welcome, {account.username}! You are a {account.role}.</h1>
+  <SignOutButton client:idle />
+</Layout>
