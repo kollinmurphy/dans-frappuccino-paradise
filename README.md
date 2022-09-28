@@ -9,6 +9,7 @@ This is a web app designed to facilitate multiple aspects of a standard coffee s
 - [Requirements Definition](docs/requirements.md)
 - [Use Case Diagrams](docs/useCases.md)
 - [Class Diagrams](docs/classDiagram.md)
+- [Prototypes](docs/prototypes.md)
 
 
 ### Prior Documentation
@@ -59,6 +60,7 @@ This project uses Astro as a Server Side Renderer and SolidJS as a front-end fra
 
 1. Make sure you have `node` installed.
 2. Clone the repo, `cd` into it, and run `npm run init`. This will initialize a SQLite database with the proper schema and seed it with some initial data, including the users `dan`, `employee`, and `user`, each with the password `password123`.
+3. You can run the site in development mode using `npm run start`.
 
 ## Build Instructions
 
