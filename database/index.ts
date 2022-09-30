@@ -18,6 +18,7 @@ import OrderModel from "./models/Order";
 import ProductModel from "./models/Product";
 import StoreConfigModel from "./models/StoreConfig";
 import OrderProductIngredientModel from "./models/OrderProductIngredient";
+import AccountFavoriteModel from "./models/AccountFavorite";
 
 export const Account = AccountModel(sequelize);
 export const Hours = HoursModel(sequelize);
@@ -25,6 +26,7 @@ export const Order = OrderModel(sequelize);
 export const Product = ProductModel(sequelize);
 export const StoreConfig = StoreConfigModel(sequelize);
 export const OrderProductIngredient = OrderProductIngredientModel(sequelize);
+export const AccountFavorite = AccountFavoriteModel(sequelize);
 
 const db = {
   Account,
