@@ -4,7 +4,7 @@ const OrderProduct = (sequelize: Sequelize) => {
   class OrderProduct extends Model<InferAttributes<OrderProduct>, InferCreationAttributes<OrderProduct>> {
     declare productId: number;
     declare orderId: number;
-    declare size: 'small' | 'medium' | 'large';;
+    declare size: 'small' | 'medium' | 'large';
     declare createdAt: Date;
     declare updatedAt: Date;
 

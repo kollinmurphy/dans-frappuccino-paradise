@@ -1,22 +1,31 @@
 'use strict';
 
+const keys = [
+  { from: 'OrderProductIngredients', column: 'orderProductId', to: 'OrderProducts' },
+  { from: 'AccountFavorites', column: 'accountId', to: 'Accounts' },
+  { from: 'AccountFavorites', column: 'orderProductId', to: 'OrderProducts' },
+  { from: 'OrderProducts', column: 'orderId', to: 'Orders' },
+  { from: 'OrderProducts', column: 'productId', to: 'Products' },
+]
+
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.addConstraint('OrderProductIngredients', {
-      fields: ['orderProductId'],
-      type: 'foreign key',
-      name: 'OrderProductIngredientsFK-OrderProduct',
-      references: {
-        table: 'Accounts',
-        field: 'id',
-      },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE',
-    })
+    for (const { from, column, to } of keys)
+      await queryInterface.addConstraint(from, {
+        fields: [column],
+        type: 'foreign key',
+        name: `${from}FK-${to}`,
+        references: {
+          table: to,
+          field: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
+      })
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeConstraint('OrderProductIngredients', 'OrderProductIngredientsFK-OrderProduct')
-    
+    for (const { from, to } of keys)
+      await queryInterface.removeConstraint(from, `${from}FK-${to}`)
   }
 };
