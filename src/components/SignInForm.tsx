@@ -26,7 +26,7 @@ const SignInForm = () => {
   return (
     <div class='flex flex-col gap-2'>
       <span>Username</span>
-      <input class='input input-bordered' ref={usernameField} />
+      <input class='input input-bordered w-full' ref={usernameField} />
 
       <span>Password</span>
       <input class='input input-bordered' type='password' ref={passwordField} onKeyPress={e => {

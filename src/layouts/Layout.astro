@@ -15,8 +15,18 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body>
-		<slot />
+	<body class='text-white'>
+		<nav class='w-full h-20 bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]'>
+			<h1 class='text-2xl lg:text-4xl text-base-100'>Dan's Frappuccino Paradise</h1>
+			<div>
+				<button class='btn btn-secondary btn-sm'>
+					Home
+				</button>
+			</div>
+		</nav>
+		<div class='p-3 flex flex-col items-center'>
+			<slot />
+		</div>
 	</body>
 </html>
 <style>
