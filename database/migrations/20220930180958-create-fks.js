@@ -6,6 +6,8 @@ const keys = [
   { from: 'AccountFavorites', column: 'orderProductId', to: 'OrderProducts' },
   { from: 'OrderProducts', column: 'orderId', to: 'Orders' },
   { from: 'OrderProducts', column: 'productId', to: 'Products' },
+  { from: 'ProductIngredients', column: 'productId', to: 'Products' },
+  { from: 'ProductIngredients', column: 'ingredientId', to: 'Ingredients' },
 ]
 
 module.exports = {

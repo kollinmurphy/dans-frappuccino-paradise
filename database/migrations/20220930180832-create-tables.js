@@ -87,7 +87,7 @@ module.exports = {
         allowNull: false,
       },
     })
-    await queryInterface.createTable('ProductIngredients', {
+    await queryInterface.createTable('Ingredients', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -105,6 +105,32 @@ module.exports = {
       quantityOnHand: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        defaultValue: 0,
+      },
+      hidden: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+    })
+    await queryInterface.createTable('ProductIngredients', {
+      productId: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      ingredientId: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         type: Sequelize.DATE,
@@ -121,6 +147,7 @@ module.exports = {
     await queryInterface.dropTable('OrderProductIngredients')
     await queryInterface.dropTable('AccountFavorites')
     await queryInterface.dropTable('OrderProducts')
+    await queryInterface.dropTable('Ingredients')
     await queryInterface.dropTable('ProductIngredients')
   }
 };

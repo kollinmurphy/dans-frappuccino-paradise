@@ -11,9 +11,8 @@ const ProductIngredient = (sequelize: Sequelize) => {
     InferAttributes<ProductIngredient>,
     InferCreationAttributes<ProductIngredient>
   > {
-    declare name: string;
-    declare price: number;
-    declare quantityOnHand: number;
+    declare ingredientId: number;
+    declare productId: number;
     declare createdAt: Date;
     declare updatedAt: Date;
 
@@ -22,17 +21,15 @@ const ProductIngredient = (sequelize: Sequelize) => {
 
   ProductIngredient.init(
     {
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      price: {
-        type: DataTypes.DECIMAL,
-        allowNull: false,
-      },
-      quantityOnHand: {
+      ingredientId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
+      },
+      productId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
       },
       createdAt: DataTypes.DATE,
       updatedAt: DataTypes.DATE,
