@@ -3,7 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import SignUpForm from '@components/SignUpForm'
 import { authenticate } from '@utils/auth';
 
-const account = authenticate(Astro.request)
+const account = authenticate(Astro.cookies)
 if (account)
   return Astro.redirect('/account')
 ---
@@ -12,5 +12,5 @@ if (account)
   <div class='w-full md:w-[50%]'>
     <h1>Sign Up</h1>
     <SignUpForm client:idle />
-  <div>
+  </div>
 </Layout>

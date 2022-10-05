@@ -3,7 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import { authenticate } from "@utils/auth";
 import SignOutButton from "@components/SignOutButton";
 
-const account = authenticate(Astro.request);
+const account = authenticate(Astro.cookies);
 if (!account) return Astro.redirect("/signin");
 ---
 

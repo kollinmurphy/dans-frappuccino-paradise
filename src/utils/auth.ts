@@ -1,21 +1,12 @@
 import { Account } from '@data/types/account';
+import type { AstroCookies } from 'astro/dist/core/cookies';
 import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = 'fraps-api-as;jrkqoq;jfkdkfkwpqoejfkljjf';
 
-const getCookies = (cookie: string) => {
-  if (!cookie) return {};
-  const pairs = cookie.split(";")
-  const splitPairs = pairs.map((c) => c.split('='))
-  return splitPairs.reduce((cookies, cookie) => {
-    cookies[decodeURIComponent(cookie[0].trim())] = decodeURIComponent(cookie[1].trim())
-    return cookies
-  }, {})
-};
-
-export const authenticate = (req: Request) => {
+export const authenticate = (cookies: AstroCookies) => {
   try {
-    const token = getCookies(req.headers.get('cookie'))['token']
+    const token = cookies.get('token').value
     if (!token) return null
     const account = jwt.verify(token, JWT_SECRET)
     return account as Omit<Account, 'password'>

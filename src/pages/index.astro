@@ -2,7 +2,7 @@
 import SignOutButton from "@components/SignOutButton";
 import { authenticate } from "@utils/auth";
 import Layout from "../layouts/Layout.astro";
-const account = authenticate(Astro.request);
+const account = authenticate(Astro.cookies);
 ---
 
 <Layout title="Welcome to Astro.">
