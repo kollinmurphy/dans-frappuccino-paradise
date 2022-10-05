@@ -16,6 +16,16 @@ export const authenticate = (cookies: AstroCookies) => {
   }
 }
 
+export const verifyToken = (token: string) => {
+  if (!token) return null
+  try {
+    const account = jwt.verify(token, JWT_SECRET)
+    return account as Omit<Account, 'passowrd'>
+  } catch (err) {
+    return null
+  }
+}
+
 export const createToken = (data: any) => {
   return jwt.sign(data, JWT_SECRET, {
     expiresIn: '1yr',
