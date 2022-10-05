@@ -78,7 +78,7 @@ const wrapper: (handler: Handler<any>) => APIRoute =
     }
   };
 
-const authorizedWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
+export const authorizedWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
   (handler) =>
   async ({ request, params }) => {
     let body: object = {};
