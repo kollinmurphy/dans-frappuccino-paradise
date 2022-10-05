@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "init": "npm install && sequelize db:migrate && sequelize db:seed:all --debug",
+    "init": "npm install && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --debug",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && node app.mjs"
@@ -26,6 +26,7 @@
     "underscore": "1.13.4"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^8.5.9"
+    "@types/jsonwebtoken": "^8.5.9",
+    "esbuild-windows-64": "^0.15.10"
   }
 }
