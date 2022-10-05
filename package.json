@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.9",
-    "esbuild-windows-64": "^0.15.10"
+    "esbuild-windows-64": "^0.15.10",
+    "sequelize-cli": "^6.5.1"
   }
 }
