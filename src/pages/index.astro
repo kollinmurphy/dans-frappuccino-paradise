@@ -1,8 +1,12 @@
 ---
+import DrinkCard from "@components/DrinkCard.astro";
 import SignOutButton from "@components/SignOutButton";
+import getProducts from "@data/api/products/get";
 import { authenticate } from "@utils/auth";
 import Layout from "../layouts/Layout.astro";
 const account = authenticate(Astro.cookies);
+
+const drinks = await getProducts()
 ---
 
 <Layout>
@@ -17,6 +21,9 @@ const account = authenticate(Astro.cookies);
         </a>
       )
     }
+    {drinks.map(drink => (
+      <DrinkCard drink={drink} />
+    ))}
   </main>
 </Layout>
 

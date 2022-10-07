@@ -1,0 +1,13 @@
+---
+import { Product } from '@data/types/product';
+
+export interface Props {
+  drink: Product;
+}
+
+const { drink } = Astro.props
+---
+
+<div>
+  {drink.name}
+</div>
