@@ -1,9 +1,9 @@
 import db from "@database"
 import wrapper, { Handler } from "@utils/wrapper"
 
-type GetDrinkInput = {}
+type GetProductsInput = {}
 
-const getDrinks: Handler<GetDrinkInput> = async () => {
+const getProducts: Handler<GetProductsInput> = async () => {
   return db.Product.findAll({
     where: {
       isDeleted: false,
@@ -11,4 +11,4 @@ const getDrinks: Handler<GetDrinkInput> = async () => {
   })
 }
 
-export const get = wrapper(getDrinks)
+export const get = wrapper(getProducts)
