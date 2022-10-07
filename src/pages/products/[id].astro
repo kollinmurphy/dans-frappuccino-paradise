@@ -4,6 +4,8 @@ import Layout from "@layouts/Layout.astro";
 
 const {id} = Astro.params as { id: number };
 const product = await getProduct(id)
+if (!product)
+    return Astro.redirect('/')
 ---
 
 <Layout> 
