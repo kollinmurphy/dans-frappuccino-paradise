@@ -12,7 +12,7 @@ const runApiCall = async (
   try {
     const response = await axios({
       method: definition.method,
-      url: `/api${definition.path.startsWith('/') ? '' : '/'}${definition.path}`,
+      url: `http://localhost:3000/api${definition.path.startsWith('/') ? '' : '/'}${definition.path}`,
       data: definition.method === "GET" ? undefined : data,
       params: definition.method === "GET" ? data : undefined,
       headers: {
@@ -24,6 +24,7 @@ const runApiCall = async (
       throw new Error(response.data?.error || 'Something unexpected happened.')
     return response.data
   } catch (err) {
+    console.error(err)
     if (!(err instanceof AxiosError))
       throw err
     throw new Error(err.response?.data?.error || 'Something unexpected happened.')
