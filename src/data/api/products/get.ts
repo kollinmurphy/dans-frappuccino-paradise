@@ -10,3 +10,12 @@ const getProducts = async (): Promise<Array<Product>> =>
   );
 
 export default getProducts;
+
+export const getProduct = async (id:number): Promise<Product> => {
+  return runApiCall(
+    {
+      method: "GET",
+      path: `/products/${id}`
+    }
+  )
+}

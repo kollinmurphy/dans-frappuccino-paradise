@@ -1,0 +1,11 @@
+---
+import { getProduct } from "@data/api/products/get";
+import Layout from "@layouts/Layout.astro";
+
+const {id} = Astro.params as { id: number };
+const product = await getProduct(id)
+---
+
+<Layout> 
+    {product.name}
+</Layout>
