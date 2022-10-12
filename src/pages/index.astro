@@ -8,19 +8,20 @@ import Layout from "../layouts/Layout.astro";
 const account = authenticate(Astro.cookies);
 
 const images = [
-  'https://picsum.photos/600',
-  'https://picsum.photos/601',
-  'https://picsum.photos/602',
+  'https://picsum.photos/id/1060/600',
+  'https://picsum.photos/id/2/601',
+  'https://picsum.photos/id/225/602',
   'https://picsum.photos/603',
   'https://picsum.photos/604',
   'https://picsum.photos/605',
 ]
+// 1060
+
 const drinks = (await getProducts()).slice(0, 2)
 ---
 
 <Layout title="">
   <main class='flex flex-col items-center'>
-    <h1>Welcome to <span class="text-gradient">Dan's Fraps</span></h1>
 
     <div class="carousel carousel-center gap-4">
       {images.map(image => (
@@ -34,7 +35,7 @@ const drinks = (await getProducts()).slice(0, 2)
     <h3 class='text-6xl mt-8'>Featured Drinks</h3>
     <div class="flex flex-wrap items-center justify-center w-full">
       {drinks.map(drink => (
-        <DrinkCard drink={drink} />
+        <DrinkCard drink={drink} tag="Featured" />
       ))}
     </div>
     
