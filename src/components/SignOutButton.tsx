@@ -4,7 +4,7 @@ const SignOutButton = () => {
   return (
     <div class='btn btn-secondary btn-sm' onClick={() => {
       document.cookie = 'token='
-      location.reload()
+      window.location.href = '/'
     }}>
       Log Out
     </div>

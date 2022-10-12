@@ -37,6 +37,16 @@ export const BUTTON_CLASSES = "btn btn-secondary btn-sm";
               <a href="/menu" class={BUTTON_CLASSES}>
                 Menu
               </a>
+              {account.role === "manager" ? (
+                <a href="/admin" class={BUTTON_CLASSES}>
+                  Manager
+                </a>
+              ) : null}
+              {account.role !== "user" ? (
+                <a href="/employee" class={BUTTON_CLASSES}>
+                  Employee
+                </a>
+              ) : null}
               <SignOutButton client:idle />
             </>
           ) : (
