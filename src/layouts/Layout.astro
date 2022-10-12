@@ -1,65 +1,123 @@
 ---
+import MenuIcon from "@components/MenuIcon.astro";
+import SignOutButton from "@components/SignOutButton";
+import { authenticate } from "@utils/auth";
+
 export interface Props {
-	title?: string;
+  title?: string;
 }
 
 const { title } = Astro.props;
+
+const account = authenticate(Astro.cookies);
+const pages = [
+  { url: "/", label: "Home" },
+  { url: "/menu", label: "Menu", roles: "*" },
+  { url: "/account", label: "Account", roles: "*" },
+  { url: "/admin", label: "Manager", roles: ["manager"] },
+  { url: "/employee", label: "Employee", roles: ["manager", "employee"] },
+];
+const availablePages = pages.filter((p) => {
+  if (!p.roles) return true;
+  if (!account) return false;
+  return p.roles === "*" || p.roles.includes(account.role);
+});
+
+export const BUTTON_CLASSES = "btn btn-secondary btn-sm";
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title || "Dan's Frappuccino Paradise"}</title>
-	</head>
-	<body class='text-white'>
-		<nav class='w-full h-20 bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]'>
-			<h1 class='text-2xl lg:text-4xl text-base-100'>Dan's Frappuccino Paradise</h1>
-			<div>
-				<button class='btn btn-secondary btn-sm'>
-					Home
-				</button>
-			</div>
-		</nav>
-		<div class='p-3 flex flex-col items-center'>
-			<slot />
-		</div>
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title || "Dan's Frappuccino Paradise"}</title>
+  </head>
+  <body class="text-white">
+    <div class="drawer drawer-end">
+      <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content">
+        <nav
+          class="w-full h-20 bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]"
+        >
+          <h1 class="text-2xl lg:text-4xl text-base-100">
+            Dan's Frappuccino Paradise
+          </h1>
+          <div class="hidden md:flex flex-row gap-2">
+            {
+              availablePages.map((p) => (
+                <a href={p.url} class={BUTTON_CLASSES}>
+                  {p.label}
+                </a>
+              ))
+            }
+            {
+              account ? (
+                <SignOutButton client:idle />
+              ) : (
+                <a href="/signin" class={BUTTON_CLASSES}>
+                  Sign In
+                </a>
+              )
+            }
+          </div>
+          <div class="flex md:hidden">
+            <label for="my-drawer-4" class="drawer-button btn-ghost btn-sm btn-circle">
+              <MenuIcon />
+            </label>
+          </div>
+        </nav>
+        <div class="p-3 flex flex-col items-center">
+          <slot />
+        </div>
+      </div>
+      <div class="drawer-side">
+        <label for="my-drawer-4" class="drawer-overlay"></label>
+        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+          {
+            availablePages.map((p) => (
+              <li>
+                <a href={p.url}>{p.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <style>
+      :root {
+        --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
+        --font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
+        --font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+
+        --color-text: hsl(12, 5%, 4%);
+        --color-bg: hsl(10, 21%, 95%);
+        --color-border: hsl(17, 24%, 90%);
+      }
+
+      html {
+        font-family: system-ui, sans-serif;
+        font-size: var(--font-size-base);
+        color: var(--color-text);
+        background-color: var(--color-bg);
+      }
+
+      body {
+        margin: 0;
+      }
+    </style>
+
+    <style is:global>
+      h1 {
+        font-size: var(--font-size-xl);
+      }
+
+      h2 {
+        font-size: var(--font-size-lg);
+      }
+    </style>
+  </body>
 </html>
-<style>
-	:root {
-		--font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
-		--font-size-lg: clamp(1.2rem, 0.7vw + 1.2rem, 1.5rem);
-		--font-size-xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
-
-		--color-text: hsl(12, 5%, 4%);
-		--color-bg: hsl(10, 21%, 95%);
-		--color-border: hsl(17, 24%, 90%);
-	}
-
-	html {
-		font-family: system-ui, sans-serif;
-		font-size: var(--font-size-base);
-		color: var(--color-text);
-		background-color: var(--color-bg);
-	}
-
-	body {
-		margin: 0;
-	}
-
-
-</style>
-
-<style is:global>
-	h1 {
-		font-size: var(--font-size-xl);
-	}
-
-	h2 {
-		font-size: var(--font-size-lg);
-	}
-</style>
