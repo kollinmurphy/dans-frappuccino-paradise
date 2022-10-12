@@ -1,11 +1,14 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { authenticate } from "@utils/auth";
+import AddMoneyForm from "@components/AddMoneyForm";
 
 const account = authenticate(Astro.cookies);
 if (!account) return Astro.redirect("/signin");
 ---
 
 <Layout title="Account">
-  <h1>Welcome, {account.username}! You are a {account.role}.</h1>
+  <h1>Welcome, {account.username}!</h1>
+
+  <AddMoneyForm client:idle />
 </Layout>

@@ -21,7 +21,7 @@ const { drink, tag } = Astro.props
       ) : null}
     </h2>
     <div class="card-actions">
-      <button class="btn btn-primary">Add to Cart</button>
+      <a href={`/products/${drink.id}`} class="btn btn-primary">Add to Cart</a>
     </div>
   </div>
 </div>
