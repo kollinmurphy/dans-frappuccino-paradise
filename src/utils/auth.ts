@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = 'fraps-api-as;jrkqoq;jfkdkfkwpqoejfkljjf';
 
-export const authenticate = (cookies: AstroCookies) => {
+export const authenticate = (cookies: AstroCookies): Omit<Account, 'password'> | null => {
   try {
     const token = cookies.get('token').value
     if (!token) return null
