@@ -24,7 +24,6 @@ const runApiCall = async (
       throw new Error(response.data?.error || 'Something unexpected happened.')
     return response.data
   } catch (err) {
-    console.error(err)
     if (!(err instanceof AxiosError))
       throw err
     throw new Error(err.response?.data?.error || 'Something unexpected happened.')
