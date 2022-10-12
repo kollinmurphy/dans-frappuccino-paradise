@@ -1,4 +1,5 @@
 ---
+import MenuIcon from "@components/MenuIcon.astro";
 import SignOutButton from "@components/SignOutButton";
 import { authenticate } from "@utils/auth";
 
@@ -9,6 +10,18 @@ export interface Props {
 const { title } = Astro.props;
 
 const account = authenticate(Astro.cookies);
+const pages = [
+  { url: "/", label: "Home" },
+  { url: "/menu", label: "Menu", roles: "*" },
+  { url: "/account", label: "Account", roles: "*" },
+  { url: "/admin", label: "Manager", roles: ["manager"] },
+  { url: "/employee", label: "Employee", roles: ["manager", "employee"] },
+];
+const availablePages = pages.filter((p) => {
+  if (!p.roles) return true;
+  if (!account) return false;
+  return p.roles === "*" || p.roles.includes(account.role);
+});
 
 export const BUTTON_CLASSES = "btn btn-secondary btn-sm";
 ---
@@ -23,43 +36,57 @@ export const BUTTON_CLASSES = "btn btn-secondary btn-sm";
     <title>{title || "Dan's Frappuccino Paradise"}</title>
   </head>
   <body class="text-white">
-    <nav
-      class="w-full h-20 bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]"
-    >
-      <h1 class="text-2xl lg:text-4xl text-base-100">
-        Dan's Frappuccino Paradise
-      </h1>
-      <div class="flex flex-row gap-2">
-        <a href="/" class={BUTTON_CLASSES}> Home</a>
-        {
-          account ? (
-            <>
-              <a href="/menu" class={BUTTON_CLASSES}>
-                Menu
-              </a>
-              {account.role === "manager" ? (
-                <a href="/admin" class={BUTTON_CLASSES}>
-                  Manager
+    <div class="drawer drawer-end">
+      <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content">
+        <nav
+          class="w-full h-20 bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]"
+        >
+          <h1 class="text-2xl lg:text-4xl text-base-100">
+            Dan's Frappuccino Paradise
+          </h1>
+          <div class="hidden md:flex flex-row gap-2">
+            {
+              availablePages.map((p) => (
+                <a href={p.url} class={BUTTON_CLASSES}>
+                  {p.label}
                 </a>
-              ) : null}
-              {account.role !== "user" ? (
-                <a href="/employee" class={BUTTON_CLASSES}>
-                  Employee
+              ))
+            }
+            {
+              account ? (
+                <SignOutButton client:idle />
+              ) : (
+                <a href="/signin" class={BUTTON_CLASSES}>
+                  Sign In
                 </a>
-              ) : null}
-              <SignOutButton client:idle />
-            </>
-          ) : (
-            <a href="/signin" class={BUTTON_CLASSES}>
-              Sign In
-            </a>
-          )
-        }
+              )
+            }
+          </div>
+          <div class="flex md:hidden">
+            <label for="my-drawer-4" class="drawer-button btn-ghost btn-sm btn-circle">
+              <MenuIcon />
+            </label>
+          </div>
+        </nav>
+        <div class="p-3 flex flex-col items-center">
+          <slot />
+        </div>
       </div>
-    </nav>
-    <div class="p-3 flex flex-col items-center">
-      <slot />
+      <div class="drawer-side">
+        <label for="my-drawer-4" class="drawer-overlay"></label>
+        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+          {
+            availablePages.map((p) => (
+              <li>
+                <a href={p.url}>{p.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
+
     <style>
       :root {
         --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.19rem);
