@@ -1,0 +1,13 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { authenticate } from "@utils/auth";
+
+const account = authenticate(Astro.cookies)
+
+if (!account || account.role !== 'manager')
+  return Astro.redirect('/404')
+---
+
+<Layout title='Admin'>
+  <h2 class='text-4xl'>Welcome to the super secret manager page.</h2>
+</Layout>
