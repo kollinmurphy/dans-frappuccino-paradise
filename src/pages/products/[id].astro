@@ -6,6 +6,8 @@ const {id} = Astro.params as { id: number };
 const product = await getProduct(id)
 if (!product)
     return Astro.redirect('/404')
+
+console.log(product)
 ---
 
 <Layout> 
@@ -15,7 +17,7 @@ if (!product)
             <img src={product.imageUrl} alt="Drink" class = "rounded-md scale-100"/>
         </div>
         <div>
-            TEXT
+            
             <select>
                 <option>1</option>
                 <option>2</option>
