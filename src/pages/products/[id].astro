@@ -1,31 +1,26 @@
 ---
+import getIngredients from "@data/api/ingredients";
 import { getProduct } from "@data/api/products/get";
 import Layout from "@layouts/Layout.astro";
 
-const {id} = Astro.params as { id: number };
-const product = await getProduct(id)
-if (!product)
-    return Astro.redirect('/404')
+const { id } = Astro.params as { id: number };
+const product = await getProduct(id);
+if (!product) return Astro.redirect("/404");
 
-console.log(product)
+const allIngredients = await getIngredients();
 ---
 
-<Layout> 
-    <h1> {product.name} </h1>
-    <div class='flex flex-col md:flex-row'>
-        <div class='scale-100'>
-            <img src={product.imageUrl} alt="Drink" class = "rounded-md scale-100"/>
-        </div>
-        <div>
-            
-            <select>
-                <option>1</option>
-                <option>2</option>
-            </select>
-        </div>
+<Layout>
+  <h1>{product.name}</h1>
+  <div class="flex flex-col md:flex-row">
+    <div class="scale-100">
+      <img src={product.imageUrl} alt="Drink" class="rounded-md scale-100" />
     </div>
-    
-    
-
-
+    <div>
+      {product.ProductIngredients.map((i) => i.Ingredient.name).join(", ")}
+      <select class='text-black'>
+        {allIngredients.map((i) => <option value={i.id}>{i.name}</option>)}
+      </select>
+    </div>
+  </div>
 </Layout>

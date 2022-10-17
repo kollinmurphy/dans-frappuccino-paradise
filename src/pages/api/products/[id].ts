@@ -8,7 +8,12 @@ const getProduct: Handler<GetProductInput> = async ({ params }) => {
   const product = await db.Product.findByPk(productId, {
     include: [{
       model: db.ProductIngredient,
-      include: [db.Ingredient],
+      include: [{
+        model: db.Ingredient,
+        where: {
+          hidden: false,
+        },
+      }],
     }],
   });
   if (!product) throw new NotFoundError("Product not found");

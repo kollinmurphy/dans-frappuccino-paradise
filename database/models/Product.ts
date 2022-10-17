@@ -11,7 +11,6 @@ const Product = (sequelize: Sequelize) => {
 
 
         static associate(models:any){
-            models.Product.hasMany(models.ProductIngredient)
         }
     }
 

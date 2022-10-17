@@ -1,5 +1,6 @@
 'use strict';
 
+import { DbModels } from '@database';
 import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize } from 'sequelize'
 
 const Account = (sequelize: Sequelize) => {
@@ -12,8 +13,7 @@ const Account = (sequelize: Sequelize) => {
     declare createdAt: Date;
     declare updatedAt: Date;
 
-    static associate(models: any) {
-      models.Account.hasMany(models.Hours)
+    static associate(models: DbModels) {
     }
   }
   Account.init({

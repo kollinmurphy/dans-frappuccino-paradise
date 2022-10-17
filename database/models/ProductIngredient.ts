@@ -17,8 +17,6 @@ const ProductIngredient = (sequelize: Sequelize) => {
     declare updatedAt: Date;
 
     static associate(models: any) {
-      models.ProductIngredient.belongsTo(models.Product)
-      models.ProductIngredient.belongsTo(models.Ingredient)
     }
   }
 

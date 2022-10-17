@@ -1,6 +1,6 @@
 "use strict";
 
-import { Sequelize } from "sequelize";
+import { Model, Sequelize } from "sequelize";
 import configFile from "./config/config.json";
 const env = process.env.NODE_ENV || "development";
 const config = configFile[env];
@@ -48,6 +48,11 @@ const db = {
   sequelize,
 };
 
-Account.associate(db);
+Account.hasMany(Hours)
+Product.hasMany(ProductIngredient)
+ProductIngredient.belongsTo(Product)
+ProductIngredient.belongsTo(Ingredient)
 
 export default db;
+
+export type DbModels = typeof db;
