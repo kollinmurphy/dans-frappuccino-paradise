@@ -83,9 +83,9 @@ export const authorizedWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
     try {
       body = await request.json();
     } catch (err) {}
-    const auth = request.headers['authorization']
+    const auth = request.headers.get('authorization')?.split(' ')
     try {
-      const user = verifyToken(auth)
+      const user = auth?.length || 0 > 1 ? verifyToken(auth[1]) : null
       if (!user)
         throw new ForbiddenError('You must be signed in')
       const result = await handler({

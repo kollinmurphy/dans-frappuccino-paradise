@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios'
+import authSignal from '@data/signals/auth'
 
 export type ApiRouteDefinition = {
   path: string;
@@ -9,6 +10,7 @@ const runApiCall = async (
   definition: ApiRouteDefinition,
   data?: object | null
 ) => {
+  const [auth] = authSignal
   try {
     const response = await axios({
       method: definition.method,
@@ -17,7 +19,7 @@ const runApiCall = async (
       params: definition.method === "GET" ? data : undefined,
       headers: {
         "Content-Type": "application/json",
-        // Authorization: authHeader() ? `Bearer ${authHeader()}` : "",
+        Authorization: `Bearer ${auth()}`,
       },
     });
     if (response.status !== 200)

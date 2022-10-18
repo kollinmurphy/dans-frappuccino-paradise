@@ -2,13 +2,17 @@
 import Layout from "@layouts/Layout.astro";
 import { authenticate } from "@utils/auth";
 import AddMoneyForm from "@components/AddMoneyForm";
+import db from "@database";
 
 const account = authenticate(Astro.cookies);
 if (!account) return Astro.redirect("/signin");
+const newAccount = await db.Account.findByPk(account.id);
+if (!newAccount) return Astro.redirect("/404");
+const balance = Math.round(newAccount.balance * 100) / 100;
 ---
 
 <Layout title="Account">
   <h1>Welcome, {account.username}!</h1>
 
-  <AddMoneyForm client:idle />
+  <AddMoneyForm balance={balance} client:idle />
 </Layout>

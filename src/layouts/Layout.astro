@@ -10,6 +10,7 @@ export interface Props {
 const { title } = Astro.props;
 
 const account = authenticate(Astro.cookies);
+const cookie = Astro.cookies.get('token').value;
 const pages = [
   { url: "/", label: "Home" },
   { url: "/menu", label: "Menu", roles: "*" },
@@ -23,7 +24,7 @@ const availablePages = pages.filter((p) => {
   return p.roles === "*" || p.roles.includes(account.role);
 });
 
-export const BUTTON_CLASSES = "btn btn-accent btn-sm btn-ghost";
+export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost";
 ---
 
 <!DOCTYPE html>
@@ -42,10 +43,10 @@ export const BUTTON_CLASSES = "btn btn-accent btn-sm btn-ghost";
         <nav
           class="w-full min-h-[92px] bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]"
         >
-          <h1 class="text-2xl lg:text-4xl text-accent">
+          <h1 class="text-xl md:text-2xl lg:text-3xl text-accent">
             Dan's Frappuccino Paradise
           </h1>
-          <div class="hidden md:flex flex-row gap-2">
+          <div class="hidden lg:flex flex-row gap-2 items-center">
             {
               availablePages.map((p) => (
                 <a href={p.url} class={BUTTON_CLASSES}>
@@ -63,10 +64,10 @@ export const BUTTON_CLASSES = "btn btn-accent btn-sm btn-ghost";
               )
             }
           </div>
-          <div class="flex md:hidden">
+          <div class="flex lg:hidden">
             <label
               for="my-drawer-4"
-              class="drawer-button btn-ghost btn-sm btn-circle"
+              class="drawer-button btn-ghost btn-sm btn-circle cursor-pointer"
             >
               <MenuIcon />
             </label>
@@ -135,5 +136,6 @@ export const BUTTON_CLASSES = "btn btn-accent btn-sm btn-ghost";
         font-size: var(--font-size-lg);
       }
     </style>
+    <div class='hidden' id='authorization'>{cookie}</div>
   </body>
 </html>

@@ -4,6 +4,7 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize }
 
 const Account = (sequelize: Sequelize) => {
   class Account extends Model<InferAttributes<Account>, InferCreationAttributes<Account>> {
+    declare id: number;
     declare username: string;
     declare password: string;
     declare role: 'manager' | 'employee' | 'user';
@@ -13,6 +14,11 @@ const Account = (sequelize: Sequelize) => {
     declare updatedAt: Date;
   }
   Account.init({
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+    },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
