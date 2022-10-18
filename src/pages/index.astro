@@ -1,24 +1,11 @@
 ---
 import DrinkCard from "@components/DrinkCard.astro";
-import SignOutButton from "@components/SignOutButton";
 import getProducts from "@data/api/products/get";
 import { authenticate } from "@utils/auth";
 import Layout from "../layouts/Layout.astro";
+import Carousel from '@components/Carousel';
 
 const account = authenticate(Astro.cookies);
-
-const images = [
-  'https://picsum.photos/id/2/601',
-  'https://picsum.photos/id/1060/600',
-  'https://picsum.photos/id/225/600',
-  'https://picsum.photos/id/425/600',
-  'https://picsum.photos/id/431/600',
-  'https://picsum.photos/id/42/600',
-  // 'https://picsum.photos/603',
-  // 'https://picsum.photos/604',
-  // 'https://picsum.photos/605',
-]
-// 1060
 
 const drinks = (await getProducts()).slice(0, 2)
 ---
@@ -26,17 +13,11 @@ const drinks = (await getProducts()).slice(0, 2)
 <Layout title="">
   <main class='flex flex-col items-center'>
 
-    <div class="carousel carousel-center gap-4">
-      {images.map(image => (
-        <div class="carousel-item">
-          <img src={image} alt="Drink" class='rounded-lg' />
-        </div>
-      ))}
-    </div>
+    <Carousel client:idle />
 
 
-    <h3 class='text-6xl mt-8'>Featured Drinks</h3>
-    <div class="flex flex-wrap items-center justify-center w-full">
+    <h3 class='text-6xl mb-4'>Featured Drinks</h3>
+    <div class="flex flex-wrap items-center justify-center w-full gap-8">
       {drinks.map(drink => (
         <DrinkCard drink={drink} tag="Featured" />
       ))}
@@ -52,11 +33,6 @@ const drinks = (await getProducts()).slice(0, 2)
 
   h1 {
     margin: 2rem 0;
-  }
-
-  main {
-    margin: auto;
-    padding: 1em;
   }
 
   .text-gradient {

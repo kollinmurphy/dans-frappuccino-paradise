@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  important: true,
 	theme: {
 		extend: {
 		},
@@ -10,10 +11,10 @@ module.exports = {
 			{
 				mytheme: {
 					"primary": "#DD7230",
-					"secondary": "#E7E393",
-					"accent": "#F4C95D",
-					"neutral": "#F6AA1C",
-					"base-100": "#2E1F27",
+					"secondary": "#F0B92D",
+					"accent": "#2E1F27",
+					"neutral": "#eee",
+					"base-100": "#E7E393",
 					"info": "#F6AA1C",
 					"success": "#2E5B24",
 					"warning": "#BC3908",

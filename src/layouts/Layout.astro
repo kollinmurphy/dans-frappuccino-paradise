@@ -23,7 +23,7 @@ const availablePages = pages.filter((p) => {
   return p.roles === "*" || p.roles.includes(account.role);
 });
 
-export const BUTTON_CLASSES = "btn btn-secondary btn-sm";
+export const BUTTON_CLASSES = "btn btn-accent btn-sm btn-ghost";
 ---
 
 <!DOCTYPE html>
@@ -35,14 +35,14 @@ export const BUTTON_CLASSES = "btn btn-secondary btn-sm";
     <meta name="generator" content={Astro.generator} />
     <title>{title || "Dan's Frappuccino Paradise"}</title>
   </head>
-  <body class="text-white">
+  <body class="text-black bg-neutral">
     <div class="drawer drawer-end">
       <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />
-      <div class="drawer-content">
+      <div class="drawer-content min-h-screen flex flex-col">
         <nav
-          class="w-full h-20 bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]"
+          class="w-full min-h-[92px] bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]"
         >
-          <h1 class="text-2xl lg:text-4xl text-base-100">
+          <h1 class="text-2xl lg:text-4xl text-accent">
             Dan's Frappuccino Paradise
           </h1>
           <div class="hidden md:flex flex-row gap-2">
@@ -64,14 +64,27 @@ export const BUTTON_CLASSES = "btn btn-secondary btn-sm";
             }
           </div>
           <div class="flex md:hidden">
-            <label for="my-drawer-4" class="drawer-button btn-ghost btn-sm btn-circle">
+            <label
+              for="my-drawer-4"
+              class="drawer-button btn-ghost btn-sm btn-circle"
+            >
               <MenuIcon />
             </label>
           </div>
         </nav>
-        <div class="p-3 flex flex-col items-center">
+        <div class="flex flex-col items-center flex-1">
           <slot />
         </div>
+        <footer
+          class="w-full bg-accent text-white min-h-[48px] mt-8 grid grid-cols-1 md:grid-cols-2"
+        >
+          <div class="flex items-center justify-center h-full p-2 text-sm">
+            &copy; {new Date().getFullYear()} Awesome Eight
+          </div>
+          <div class="flex items-center justify-center text-center p-2 text-2xs">
+            Created by John Belnap, Caden Harris, Kollin Murphy, and Trenton Peters.
+          </div>
+        </footer>
       </div>
       <div class="drawer-side">
         <label for="my-drawer-4" class="drawer-overlay"></label>

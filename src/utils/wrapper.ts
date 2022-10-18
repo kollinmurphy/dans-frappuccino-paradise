@@ -53,9 +53,7 @@ const wrapper: (handler: Handler<any>) => APIRoute =
     let body: object = {};
     try {
       body = await request.json();
-    } catch (err) {
-      console.error("Body is not a valid JSON");
-    }
+    } catch (err) {}
     try {
       const result = await handler({
         request,
@@ -84,9 +82,7 @@ export const authorizedWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
     let body: object = {};
     try {
       body = await request.json();
-    } catch (err) {
-      console.error("Body is not a valid JSON");
-    }
+    } catch (err) {}
     const auth = request.headers['authorization']
     try {
       const user = verifyToken(auth)
