@@ -1,6 +1,6 @@
 "use strict";
 
-import { Model, Sequelize } from "sequelize";
+import { Sequelize } from "sequelize";
 import configFile from "./config/config.json";
 const env = process.env.NODE_ENV || "development";
 const config = configFile[env];
@@ -48,10 +48,32 @@ const db = {
   sequelize,
 };
 
-Account.hasMany(Hours)
-Product.hasMany(ProductIngredient)
-ProductIngredient.belongsTo(Product)
-ProductIngredient.belongsTo(Ingredient)
+Account.hasMany(Hours);
+Account.hasMany(OrderProductIngredient);
+Account.hasMany(AccountFavorite);
+Account.hasMany(Order);
+
+AccountFavorite.belongsTo(Account);
+AccountFavorite.belongsTo(OrderProduct);
+
+Hours.belongsTo(Account);
+Hours.belongsTo(Account);
+
+Order.belongsTo(Account);
+Order.hasMany(OrderProduct);
+
+OrderProduct.belongsTo(Order);
+OrderProduct.hasMany(OrderProductIngredient);
+
+OrderProductIngredient.belongsTo(OrderProduct);
+OrderProductIngredient.belongsTo(ProductIngredient);
+
+Product.hasMany(ProductIngredient);
+
+ProductIngredient.belongsTo(Product);
+ProductIngredient.belongsTo(Ingredient);
+
+Ingredient.hasMany(ProductIngredient);
 
 export default db;
 

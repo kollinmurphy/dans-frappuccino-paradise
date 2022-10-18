@@ -9,11 +9,6 @@ const Order = (sequelize: Sequelize) => {
     declare status: 'created' | 'cancelled' | 'fulfilled';
     declare createdAt: Date;
     declare updatedAt: Date;
-
-    static associate(models: any) {
-      models.Order.hasMany(models.OrderProduct)
-      models.Hours.belongsTo(models.Account)
-    }
   }
   Order.init({
     accountId: {

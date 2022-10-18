@@ -17,8 +17,6 @@ const Ingredient = (sequelize: Sequelize) => {
     declare hidden: boolean;
     declare createdAt: Date;
     declare updatedAt: Date;
-
-    static associate(models: any) {}
   }
 
   Ingredient.init(

@@ -9,11 +9,6 @@ const OrderProductIngredient = (sequelize: Sequelize) => {
     declare quantity: number;
     declare createdAt: Date;
     declare updatedAt: Date;
-
-    static associate(models: any) {
-      models.OrderProductIngredient.belongsTo(models.OrderProduct)
-      models.OrderProductIngredient.belongsTo(models.ProductIngredient)
-    }
   }
   OrderProductIngredient.init({
     orderProductId: {

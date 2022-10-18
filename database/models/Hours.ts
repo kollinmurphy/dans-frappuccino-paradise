@@ -7,10 +7,6 @@ const Hours = (sequelize: Sequelize) => {
     declare paid: boolean;
     declare createdAt: Date;
     declare updatedAt: Date;
-
-    static associate(models: any) {
-      models.Hours.belongsTo(models.Account)
-    }
   }
 
   Hours.init({

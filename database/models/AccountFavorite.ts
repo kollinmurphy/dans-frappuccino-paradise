@@ -18,11 +18,6 @@ const AccountFavorite = (sequelize: Sequelize) => {
     declare name: string;
     declare createdAt: Date;
     declare updatedAt: Date;
-
-    static associate(models: any) {
-      models.AccountFavorite.belongsTo(models.Account);
-      models.AccountFavorite.belongsTo(models.OrderProduct);
-    }
   }
   AccountFavorite.init(
     {

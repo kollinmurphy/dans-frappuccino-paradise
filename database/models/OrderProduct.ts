@@ -7,11 +7,6 @@ const OrderProduct = (sequelize: Sequelize) => {
     declare size: 'small' | 'medium' | 'large';
     declare createdAt: Date;
     declare updatedAt: Date;
-
-    static associate(models: any) {
-      models.OrderProduct.belongsTo(models.Order)
-      models.Account.hasMany(models.OrderProductIngredients)
-    }
   }
 
   OrderProduct.init({

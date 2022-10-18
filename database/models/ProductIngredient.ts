@@ -15,9 +15,6 @@ const ProductIngredient = (sequelize: Sequelize) => {
     declare productId: number;
     declare createdAt: Date;
     declare updatedAt: Date;
-
-    static associate(models: any) {
-    }
   }
 
   ProductIngredient.init(

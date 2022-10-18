@@ -13,8 +13,6 @@ const StoreConfig = (sequelize: Sequelize) => {
   > {
     declare key: string;
     declare value: number;
-
-    static associate(models: any) {}
   }
 
   StoreConfig.init(
