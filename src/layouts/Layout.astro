@@ -14,8 +14,8 @@ const pages = [
   { url: "/", label: "Home" },
   { url: "/menu", label: "Menu", roles: "*" },
   { url: "/account", label: "Account", roles: "*" },
-  { url: "/admin", label: "Manager", roles: ["manager"] },
   { url: "/employee", label: "Employee", roles: ["manager", "employee"] },
+  { url: "/admin", label: "Manager", roles: ["manager"] },
 ];
 const availablePages = pages.filter((p) => {
   if (!p.roles) return true;
@@ -76,7 +76,7 @@ export const BUTTON_CLASSES = "btn btn-accent btn-sm btn-ghost";
           <slot />
         </div>
         <footer
-          class="w-full bg-accent text-white min-h-[48px] mt-8 grid grid-cols-1 md:grid-cols-2"
+          class="w-full bg-accent text-white mt-8 grid grid-cols-1 md:grid-cols-2"
         >
           <div class="flex items-center justify-center h-full p-2 text-sm">
             &copy; {new Date().getFullYear()} Awesome Eight
@@ -88,7 +88,7 @@ export const BUTTON_CLASSES = "btn btn-accent btn-sm btn-ghost";
       </div>
       <div class="drawer-side">
         <label for="my-drawer-4" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
+        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content gap-2">
           {
             availablePages.map((p) => (
               <li>
@@ -96,6 +96,9 @@ export const BUTTON_CLASSES = "btn btn-accent btn-sm btn-ghost";
               </li>
             ))
           }
+          <div class='ml-4'>
+            <SignOutButton client:idle />
+          </div>
         </ul>
       </div>
     </div>

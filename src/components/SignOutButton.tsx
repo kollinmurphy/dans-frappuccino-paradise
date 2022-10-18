@@ -6,7 +6,7 @@ const SignOutButton = () => {
       document.cookie = 'token='
       window.location.href = '/'
     }}>
-      Log Out
+      Sign Out
     </div>
   )
 }

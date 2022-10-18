@@ -14,7 +14,9 @@ const drinks = await getProducts()
 <Layout title="">
   <main class='flex flex-col items-center'>
 
-    <div class="flex flex-wrap items-center justify-center w-full">
+    <h1>Menu</h1>
+
+    <div class="flex flex-wrap items-center justify-center w-full gap-8">
       {drinks.map(drink => (
         <DrinkCard drink={drink} />
       ))}

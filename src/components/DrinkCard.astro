@@ -3,7 +3,7 @@ import { Product } from "@data/types/product";
 
 export interface Props {
   drink: Product;
-  tag: string;
+  tag?: string;
 }
 
 const { drink, tag } = Astro.props;
