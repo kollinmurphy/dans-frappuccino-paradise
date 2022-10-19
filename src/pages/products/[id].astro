@@ -2,6 +2,7 @@
 import getIngredients from "@data/api/ingredients";
 import { getProduct } from "@data/api/products/get";
 import Layout from "@layouts/Layout.astro";
+import DrinkCustomization from '@components/DrinkCustomization'
 
 const { id } = Astro.params as { id: number };
 const product = await getProduct(id);
@@ -16,11 +17,6 @@ const allIngredients = await getIngredients();
     <div class="scale-100">
       <img src={product.imageUrl} alt="Drink" class="rounded-md scale-100" />
     </div>
-    <div>
-      {product.ProductIngredients.map((i) => i.Ingredient.name).join(", ")}
-      <select class='text-black'>
-        {allIngredients.map((i) => <option value={i.id}>{i.name}</option>)}
-      </select>
-    </div>
+    <DrinkCustomization client:load allIngredients={allIngredients} product={product} />
   </div>
 </Layout>
