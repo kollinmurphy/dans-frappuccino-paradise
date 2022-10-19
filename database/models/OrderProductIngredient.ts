@@ -5,7 +5,7 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize }
 const OrderProductIngredient = (sequelize: Sequelize) => {
   class OrderProductIngredient extends Model<InferAttributes<OrderProductIngredient>, InferCreationAttributes<OrderProductIngredient>> {
     declare orderProductId: number;
-    declare productIngredientId: number;
+    declare ingredientId: number;
     declare quantity: number;
     declare createdAt: Date;
     declare updatedAt: Date;
@@ -15,7 +15,7 @@ const OrderProductIngredient = (sequelize: Sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    productIngredientId: {
+    ingredientId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

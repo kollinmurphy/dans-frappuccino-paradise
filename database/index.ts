@@ -49,7 +49,6 @@ const db = {
 };
 
 Account.hasMany(Hours);
-Account.hasMany(OrderProductIngredient);
 Account.hasMany(AccountFavorite);
 Account.hasMany(Order);
 
@@ -66,7 +65,7 @@ OrderProduct.belongsTo(Order);
 OrderProduct.hasMany(OrderProductIngredient);
 
 OrderProductIngredient.belongsTo(OrderProduct);
-OrderProductIngredient.belongsTo(ProductIngredient);
+OrderProductIngredient.belongsTo(Ingredient);
 
 Product.hasMany(ProductIngredient);
 

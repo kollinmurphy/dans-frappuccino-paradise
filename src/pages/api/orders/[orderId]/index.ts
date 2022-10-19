@@ -4,7 +4,7 @@ import wrapper, { Handler, NotFoundError } from "@utils/wrapper"
 type GetOrderInput = {}
 
 const getOrder: Handler<GetOrderInput> = async ({ params }) => {
-  const orderId = params.id
+  const orderId = params.orderId
   const order = await db.Order.findByPk(orderId)
   if (!order)
     throw new NotFoundError('order not found')

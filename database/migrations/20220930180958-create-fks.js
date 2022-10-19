@@ -2,6 +2,7 @@
 
 const keys = [
   { from: 'OrderProductIngredients', column: 'orderProductId', to: 'OrderProducts' },
+  { from: 'OrderProductIngredients', column: 'ingredientId', to: 'Ingredients' },
   { from: 'AccountFavorites', column: 'accountId', to: 'Accounts' },
   { from: 'AccountFavorites', column: 'orderProductId', to: 'OrderProducts' },
   { from: 'OrderProducts', column: 'orderId', to: 'Orders' },
