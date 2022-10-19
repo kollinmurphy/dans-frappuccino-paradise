@@ -17,11 +17,8 @@ export default function DrinkCustomization(props: Props) {
     .filter(i => !ingredients().some(si => si.id === i.id))
 
   return (
-    <div>
+    <div class='flex flex-row gap-4'>
       <div class="overflow-x-auto">
-        <Show when={ingredients().length > 5}>
-          <div>you are insane</div>
-        </Show>
         <table class="table table-zebra w-full">
           <thead>
             <tr>
