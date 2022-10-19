@@ -21,6 +21,7 @@ export default function AddMoneyForm(props: { balance: number }) {
             class="input input-bordered"
             value={money()}
             onChange={(e) => setMoney(e.currentTarget.valueAsNumber)}
+            min={0}
           />
         </div>
       </div>
