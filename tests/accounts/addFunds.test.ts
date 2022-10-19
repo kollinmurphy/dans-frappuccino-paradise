@@ -39,7 +39,7 @@ describe("Add Funds", () => {
     ).rejects.toThrow("Unable to find account");
   });
 
-  test("returns new data", async () => {
+  test("returns updated user without password", async () => {
     const res = await addFunds({
       body: { amount: 100 },
       user: account,

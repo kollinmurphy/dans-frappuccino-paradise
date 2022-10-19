@@ -59,22 +59,22 @@ This project uses Astro as a Server Side Renderer and SolidJS as a front-end fra
 ## Setup Procedure
 
 1. Make sure you have `node` installed.
-2. Clone the repo, `cd` into it, and run `npm run init`. This will initialize a SQLite database with the proper schema and seed it with some initial data, including the users `dan`, `employee`, and `user`, each with the password `password123`.
-3. You can run the site in development mode using `npm run start`.
+2. Clone the repo, `cd` into it, and run `npm run setup`. This will initialize a SQLite database with the proper schema and seed it with some initial data, including the users `dan`, `employee`, and `user`, each with the password `password123`.
+3. You can run the site in development mode using `npm run start`, or build it using `npm run build`.
 
 ## Build Instructions
 
-Just run `npm run build` and everything will work like a charm! It'll spin up a server on port 8080. View the front-end in the browser at `http://localhost:8080`.
+To create a productoin build, run `npm run build`. It'll spin up a server on port 3000. View the front-end in the browser at `http://localhost:3000`.
 
 ## Unit Testing Instructions
 
-The unit tests address several commonly identified uses including those found in the use case diagrams. The unit tests are located in @@@@. All unit test will be run by default, but it will be possible to run specific unit tests by inputting the number corresponding to the same use case. It is possible to test the following cases @@@@.
+For unit tests, we are using the Jest framework. The unit tests address several commonly identified uses including those found in the use case diagrams. The unit tests are located in the `tests` directory. To run the unit tests, run the command `npm test`.
 
 ## System Testing Instructions
 
 1.  Make sure you have `node` installed: [node](https://nodejs.org/en/).
 2.  Clone the repo, `cd` into it, and run `npm run init`. This will initialize an SQLite database with the proper schema and seed it with some initial data, including the users `dan`, `employee`, and `user`, each with the password `password123`.
-3. Run `npm run build`. This will start up a server on port 8080. View the front-end in the browser at `http://localhost:8080`. The current user types are `manager`, `employee`, `user`.
+3. Run `npm start`. This will start up a development server on port 3000. View the front-end in the browser at `http://localhost:3000`.
 
 
 ## Other development notes, as needed

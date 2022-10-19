@@ -8,5 +8,7 @@ import node from "@astrojs/node";
 export default defineConfig({
   integrations: [tailwind(), solidJs()],
   output: "server",
-  adapter: node()
+  adapter: node({
+    mode: 'standalone',
+  }),
 });
