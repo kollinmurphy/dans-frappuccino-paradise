@@ -33,24 +33,7 @@ const getUser: AuthorizedHandler<GetUserInput> = async ({ user }) => {
   const account = await db.Account.findByPk(user.id)
   if (!account)
     throw new NotFoundError('Unable to find account')
-  const orders = await db.Order.findAll({
-    where: {
-      accountId: account.id,
-      paid: false,
-      status: 'created',
-    },
-    include: [{
-      model: db.OrderProduct,
-      include: [{
-        model: db.OrderProductIngredient,
-        include: [db.Ingredient],
-      }],
-    }],
-    order: [['createdAt', 'DESC']],
-    limit: 1,
-  })
-  const order = orders.length > 0 ? orders[0] : null
-  return { ...account.get({ plain: true }), order }
+  return account
 }
 
 export const get = authorizedWrapper(getUser)

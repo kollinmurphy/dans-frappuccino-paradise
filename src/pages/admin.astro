@@ -1,13 +1,20 @@
 ---
+import getIngredients from "@data/api/ingredients";
 import Layout from "@layouts/Layout.astro";
 import { authenticate } from "@utils/auth";
+import Inventory from "@components/Manager/Inventory";
 
-const account = authenticate(Astro.cookies)
+const account = authenticate(Astro.cookies);
 
-if (!account || account.role !== 'manager')
-  return Astro.redirect('/404')
+if (!account || account.role !== "manager") return Astro.redirect("/404");
+
+const ingredients = await getIngredients();
 ---
 
-<Layout title='Admin'>
-  <h2 class='text-4xl'>Welcome to the super secret manager page.</h2>
+<Layout title="Admin">
+  <h2 class="text-4xl mt-6 mb-2">Hey there, {account.username}! Welcome to the manager page.</h2>
+
+  <div class="overflow-x-auto">
+    <Inventory client:idle ingredients={ingredients} />
+  </div>
 </Layout>

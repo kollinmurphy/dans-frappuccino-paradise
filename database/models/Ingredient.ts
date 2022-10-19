@@ -11,7 +11,7 @@ const Ingredient = (sequelize: Sequelize) => {
     InferAttributes<Ingredient>,
     InferCreationAttributes<Ingredient>
   > {
-    declare id;
+    declare id: number;
     declare name: string;
     declare price: number;
     declare quantityOnHand: number;

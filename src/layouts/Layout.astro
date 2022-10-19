@@ -10,7 +10,7 @@ export interface Props {
 const { title } = Astro.props;
 
 const account = authenticate(Astro.cookies);
-const cookie = Astro.cookies.get('token').value;
+const cookie = Astro.cookies.get("token").value;
 const pages = [
   { url: "/", label: "Home" },
   { url: "/menu", label: "Menu", roles: "*" },
@@ -43,9 +43,11 @@ export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost";
         <nav
           class="w-full min-h-[92px] bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]"
         >
-          <h1 class="text-xl md:text-2xl lg:text-3xl text-accent">
-            Dan's Frappuccino Paradise
-          </h1>
+          <a href="/">
+            <h1 class="text-xl md:text-2xl lg:text-3xl text-accent">
+              Dan's Frappuccino Paradise
+            </h1>
+          </a>
           <div class="hidden lg:flex flex-row gap-2 items-center">
             {
               availablePages.map((p) => (
@@ -82,14 +84,19 @@ export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost";
           <div class="flex items-center justify-center h-full p-2 text-sm">
             &copy; {new Date().getFullYear()} Awesome Eight
           </div>
-          <div class="flex items-center justify-center text-center p-2 text-2xs">
-            Created by John Belnap, Caden Harris, Kollin Murphy, and Trenton Peters.
+          <div
+            class="flex items-center justify-center text-center p-2 text-2xs"
+          >
+            Created by John Belnap, Caden Harris, Kollin Murphy, and Trenton
+            Peters.
           </div>
         </footer>
       </div>
       <div class="drawer-side">
         <label for="my-drawer-4" class="drawer-overlay"></label>
-        <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content gap-2">
+        <ul
+          class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content gap-2"
+        >
           {
             availablePages.map((p) => (
               <li>
@@ -97,7 +104,7 @@ export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost";
               </li>
             ))
           }
-          <div class='ml-4'>
+          <div class="ml-4">
             <SignOutButton client:idle />
           </div>
         </ul>
@@ -136,6 +143,6 @@ export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost";
         font-size: var(--font-size-lg);
       }
     </style>
-    <div class='hidden' id='authorization'>{cookie}</div>
+    <div class="hidden" id="authorization">{cookie}</div>
   </body>
 </html>
