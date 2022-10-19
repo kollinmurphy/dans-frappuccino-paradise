@@ -4,7 +4,6 @@ import { APIRoute, Params } from "astro";
 import { verifyToken } from "./auth";
 
 export type HandlerInput<T> = {
-  request: Request;
   params: Params;
   body: T;
 };
@@ -12,7 +11,6 @@ export type HandlerInput<T> = {
 export type Handler<T> = (input: HandlerInput<T>) => any;
 
 export type AuthorizedHandlerInput<T> = {
-  request: Request;
   params: Params;
   body: T;
   user: Omit<Account, 'password'>;
@@ -56,7 +54,6 @@ const wrapper: (handler: Handler<any>) => APIRoute =
     } catch (err) {}
     try {
       const result = await handler({
-        request,
         params,
         body,
       });
@@ -89,7 +86,6 @@ export const authorizedWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
       if (!user)
         throw new ForbiddenError('You must be signed in')
       const result = await handler({
-        request,
         params,
         body,
         user,

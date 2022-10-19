@@ -5,7 +5,7 @@ type AddFundsInput = {
   amount: number;
 }
 
-const addFunds: AuthorizedHandler<AddFundsInput> = async ({ body, user }) => {
+export const addFunds: AuthorizedHandler<AddFundsInput> = async ({ body, user }) => {
   const { amount } = body
   const account = await db.Account.findByPk(user.id)
   if (!account)
