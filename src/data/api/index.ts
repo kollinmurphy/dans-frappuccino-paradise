@@ -28,6 +28,7 @@ const runApiCall = async (
   } catch (err) {
     if (!(err instanceof AxiosError))
       throw err
+    console.error(err)
     throw new Error(err.response?.data?.error || 'Something unexpected happened.')
   }
 };

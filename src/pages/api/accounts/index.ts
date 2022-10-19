@@ -1,6 +1,6 @@
 import db from "@database";
 import { hash } from "argon2";
-import wrapper, { Handler, InvalidRequestError } from "@utils/wrapper";
+import wrapper, { AuthorizedHandler, authorizedWrapper, Handler, InvalidRequestError, NotFoundError } from "@utils/wrapper";
 import { createToken } from "@utils/auth";
 
 type CreateUserInput = {
@@ -26,3 +26,31 @@ const createUser: Handler<CreateUserInput> = async ({ body }) => {
 }
 
 export const post = wrapper(createUser)
+
+type GetUserInput = {}
+
+const getUser: AuthorizedHandler<GetUserInput> = async ({ user }) => {
+  const account = await db.Account.findByPk(user.id)
+  if (!account)
+    throw new NotFoundError('Unable to find account')
+  const orders = await db.Order.findAll({
+    where: {
+      accountId: account.id,
+      paid: false,
+      status: 'created',
+    },
+    include: [{
+      model: db.OrderProduct,
+      include: [{
+        model: db.OrderProductIngredient,
+        include: [db.Ingredient],
+      }],
+    }],
+    order: [['createdAt', 'DESC']],
+    limit: 1,
+  })
+  const order = orders.length > 0 ? orders[0] : null
+  return { ...account.get({ plain: true }), order }
+}
+
+export const get = authorizedWrapper(getUser)
