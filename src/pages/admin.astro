@@ -3,16 +3,24 @@ import getIngredients from "@data/api/ingredients";
 import Layout from "@layouts/Layout.astro";
 import { authenticate } from "@utils/auth";
 import Inventory from "@components/Manager/Inventory";
+import { CONFIG_STORE_BALANCE, getConfig } from "@utils/db";
+import { numToPrice } from "@utils/strings";
 
 const account = authenticate(Astro.cookies);
 
 if (!account || account.role !== "manager") return Astro.redirect("/404");
 
-const ingredients = await getIngredients();
+const ingredients = await getIngredients({ hidden: true });
+const storeBalance = await getConfig(CONFIG_STORE_BALANCE, 0);
+const storeBalanceString = numToPrice(storeBalance)
 ---
 
 <Layout title="Admin">
   <h2 class="text-4xl mt-6 mb-2">Hey there, {account.username}! Welcome to the manager page.</h2>
+
+  <div class='text-xl'>
+    Current store balance: <span class='font-bold'>{storeBalanceString}</span>
+  </div>
 
   <div class="overflow-x-auto">
     <Inventory client:idle ingredients={ingredients} />
