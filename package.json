@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "setup": "npm install && npm run setup:db",
-    "setup:db": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --debug",
+    "setup:db": "npx sequelize-cli db:migrate",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "npx astro build && npm run setup:db",

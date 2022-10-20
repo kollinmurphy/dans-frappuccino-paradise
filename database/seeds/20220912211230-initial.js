@@ -2,12 +2,10 @@
 
 const argon2 = require('argon2')
 const hash = (password) => argon2.hash(password)
-const db = require('../index')
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    const count = await db.Account.count()
-    if (count > 0) return console.log('skipping seed')
+  async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Accounts', [
       {
         username: 'dan',
@@ -33,7 +31,7 @@ module.exports = {
     ])
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
