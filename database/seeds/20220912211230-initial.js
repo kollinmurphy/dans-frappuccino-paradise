@@ -2,9 +2,12 @@
 
 const argon2 = require('argon2')
 const hash = (password) => argon2.hash(password)
+const db = require('../index')
 
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const count = await db.Account.count()
+    if (count > 0) return console.log('skipping seed')
     await queryInterface.bulkInsert('Accounts', [
       {
         username: 'dan',

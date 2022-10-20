@@ -1,5 +1,7 @@
 'use strict';
 
+const db = require('../index')
+
 const addTimestamps = (list) => list.map(d => ({
   ...d,
   createdAt: new Date(),
@@ -8,6 +10,8 @@ const addTimestamps = (list) => list.map(d => ({
 
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const count = await db.Ingredient.count()
+    if (count > 0) return console.log('skipping seed')
     await queryInterface.bulkInsert('Ingredients', addTimestamps([
       { name: "Small Cup", price: 0.10, hidden: true, quantityOnHand: 10 },
       { name: "Medium Cup", price: 0.15, hidden: true, quantityOnHand: 10 },

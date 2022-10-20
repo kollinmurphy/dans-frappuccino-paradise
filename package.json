@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "setup": "npm install && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --debug",
+    "setup": "npm install && npm run setup:db",
+    "setup:db": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --debug",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npx astro build && npm run setup",
+    "build": "npx astro build && npm run setup:db",
     "test": "npx jest"
   },
   "dependencies": {

@@ -1,8 +1,12 @@
 'use strict';
 
+const db = require('../index')
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const count = await db.StoreConfig.count()
+    if (count > 0) return console.log('skipping seed')
     await queryInterface.bulkInsert('StoreConfig', [
       { key: 'balance', value: 10000 },
       { key: 'percentPriceModifier', value: 1.50 },
