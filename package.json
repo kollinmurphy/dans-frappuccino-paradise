@@ -6,7 +6,7 @@
     "setup": "npm install && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all --debug",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npx astro build && node ./dist/server/entry.mjs",
+    "build": "npx astro build && npm run setup",
     "test": "npx jest"
   },
   "dependencies": {
