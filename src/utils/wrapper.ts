@@ -13,7 +13,7 @@ export type Handler<T> = (input: HandlerInput<T>) => any;
 export type AuthorizedHandlerInput<T> = {
   params: Params;
   body: T;
-  user: Omit<Account, 'password'>;
+  user: Omit<Account, "password">;
 };
 
 export type AuthorizedHandler<T> = (input: AuthorizedHandlerInput<T>) => any;
@@ -80,11 +80,46 @@ export const authorizedWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
     try {
       body = await request.json();
     } catch (err) {}
-    const auth = request.headers.get('authorization')?.split(' ')
+    const auth = request.headers.get("authorization")?.split(" ");
     try {
-      const user = auth?.length || 0 > 1 ? verifyToken(auth[1]) : null
-      if (!user)
-        throw new ForbiddenError('You must be signed in')
+      const user = auth?.length || 0 > 1 ? verifyToken(auth[1]) : null;
+      if (!user) throw new ForbiddenError("You must be signed in");
+      const result = await handler({
+        params,
+        body,
+        user,
+      });
+      if (!result)
+        return new Response(JSON.stringify({ success: true }), { status: 200 });
+      return new Response(JSON.stringify(result), { status: 200 });
+    } catch (err) {
+      if (err instanceof HttpError)
+        return new Response(JSON.stringify({ error: err.message }), {
+          status: err.statusCode,
+        });
+      console.error(err);
+      return new Response(
+        JSON.stringify({ error: "Something unexpected happened." }),
+        { status: 500 }
+      );
+    }
+  };
+
+export const adminWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
+  (handler) =>
+  async ({ request, params }) => {
+    let body: object = {};
+    try {
+      body = await request.json();
+    } catch (err) {}
+    const auth = request.headers.get("authorization")?.split(" ");
+    try {
+      const user = auth?.length || 0 > 1 ? verifyToken(auth[1]) : null;
+      if (!user) throw new ForbiddenError("You must be signed in");
+      if (user.role !== "manager")
+        throw new ForbiddenError(
+          "You must be an admin to access this resource"
+        );
       const result = await handler({
         params,
         body,
