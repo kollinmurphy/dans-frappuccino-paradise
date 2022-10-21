@@ -15,13 +15,18 @@ const drinks = (await getProducts()).slice(0, 2)
 
     <Carousel client:idle />
 
-
-    <h3 class='text-6xl mb-4'>Featured Drinks</h3>
-    <div class="flex flex-wrap items-center justify-center w-full gap-8">
-      {drinks.map(drink => (
-        <DrinkCard drink={drink} tag="Featured" />
-      ))}
-    </div>
+    {account ? (
+      <h3 class='text-6xl mb-4'>Featured Drinks</h3>
+      <div class="flex flex-wrap items-center justify-center w-full gap-8">
+        {drinks.map(drink => (
+          <DrinkCard drink={drink} tag="Featured" />
+        ))}
+      </div>
+    ) : (
+      <div>
+        <h3 class='text-2xl'><a class='underline text-gray-800 hover:text-gray-600' href='/signin'>Sign in</a> or <a class='underline text-gray-800 hover:text-gray-600' href='/signup'>create an account</a> to view the menu!</h3>  
+      </div>
+    )}
     
   </main>
 </Layout>

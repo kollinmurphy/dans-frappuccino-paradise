@@ -2,13 +2,16 @@
 import getIngredients from "@data/api/ingredients";
 import { getProduct } from "@data/api/products/get";
 import Layout from "@layouts/Layout.astro";
-import DrinkCustomization from '@components/DrinkCustomization'
+import DrinkCustomization from "@components/DrinkCustomization";
+import { authenticate } from "@utils/auth";
 
 const { id } = Astro.params as { id: number };
+const account = authenticate(Astro.cookies);
+if (!account) return Astro.redirect("/signin");
 const product = await getProduct(id);
 if (!product) return Astro.redirect("/404");
 
-const allIngredients = await getIngredients();
+const allIngredients = await getIngredients({ hidden: false });
 ---
 
 <Layout>
@@ -17,6 +20,10 @@ const allIngredients = await getIngredients();
     <div class="scale-100">
       <img src={product.imageUrl} alt="Drink" class="rounded-md scale-100" />
     </div>
-    <DrinkCustomization client:load allIngredients={allIngredients} product={product} />
+    <DrinkCustomization
+      client:load
+      allIngredients={allIngredients}
+      product={product}
+    />
   </div>
 </Layout>
