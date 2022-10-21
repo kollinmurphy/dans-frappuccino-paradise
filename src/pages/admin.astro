@@ -1,5 +1,6 @@
 ---
 import getIngredients from "@data/api/ingredients";
+import LoanRequest from "@components/Manager/LoanRequest";
 import Layout from "@layouts/Layout.astro";
 import { authenticate } from "@utils/auth";
 import Inventory from "@components/Manager/Inventory";
@@ -21,6 +22,8 @@ const storeBalanceString = numToPrice(storeBalance)
   <div class='text-xl'>
     Current store balance: <span class='font-bold'>{storeBalanceString}</span>
   </div>
+
+  <LoanRequest client:idle />
 
   <div class="overflow-x-auto">
     <Inventory client:idle ingredients={ingredients} />
