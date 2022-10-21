@@ -1,20 +1,32 @@
 /* @jsxImportSource solid-js */
 
 import { Ingredient, Product } from "@data/types/product"
-import { createSignal, Show } from "solid-js";
+import { createEffect, createSignal, Show } from "solid-js";
 
 type Props = {
   product: Product;
   allIngredients: Array<Ingredient>;
 }
 
+type DrinkIngredient = Pick<Ingredient, 'id' | 'name' | 'price' | 'hidden'> & { quantity: number };
+
 export default function DrinkCustomization(props: Props) {
-  const [ingredients, setIngredients] = createSignal(props.product.ProductIngredients.map(pi => pi.Ingredient))
+  const [ingredients, setIngredients] = createSignal<DrinkIngredient[]>(props.product.ProductIngredients.map(pi => ({
+    id: pi.Ingredient.id,
+    price: pi.Ingredient.price,
+    hidden: pi.Ingredient.hidden,
+    quantity: 1,
+    name: pi.Ingredient.name,
+  })))
 
   let ingredientRef: HTMLSelectElement | undefined
 
   const notSelectedIngredients = () => props.allIngredients
     .filter(i => !ingredients().some(si => si.id === i.id))
+
+  createEffect(() => {
+    console.log(ingredients())
+  })
 
   return (
     <div class='flex flex-row gap-4'>
@@ -32,13 +44,25 @@ export default function DrinkCustomization(props: Props) {
               <tr>
                 <th>{i.name}</th>
                 <th>
-                  <select class="select w-full max-w-xs">
-                    <option selected>1</option>
+                  <select class="select w-full max-w-xs" value={i.quantity} onChange={(e)=>{
+                    const value = parseInt(e.currentTarget.value)
+                    if(value===0){
+                      setIngredients(prevIngredients => prevIngredients.filter(pi => pi.id !== i.id))
+                    } else{
+                      setIngredients(prevIngredients => prevIngredients.map(pi => {
+                        if(i.id === pi.id){
+                          return { ...pi, quantity: value }
+                        }
+                        return pi
+                      }))
+                    }
+                  }}>
+                    <option>0</option>
+                    <option>1</option>
                     <option>2</option>
                     <option>3</option>
                     <option>4</option>
                     <option>5</option>
-                    <option>0</option>
                   </select>
                 </th>
               </tr>
@@ -60,7 +84,13 @@ export default function DrinkCustomization(props: Props) {
                   const id = parseInt(selectedIngredient)
                   const ingredient = props.allIngredients.find(i => i.id === id)
                   if (!ingredient) return
-                  setIngredients(prevIngredients => [...prevIngredients, ingredient])
+                  setIngredients(prevIngredients => [...prevIngredients, {
+                    id: ingredient.id,
+                    name: ingredient.name,
+                    price: ingredient.price,
+                    hidden: false,
+                    quantity: 1
+                  }])
                 }}>
                   Add
 
