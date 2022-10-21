@@ -71,7 +71,7 @@ export default function DrinkCustomization(props: Props) {
 
               <th>
                 <select ref={ingredientRef} class='text-black select select-bordered'>
-                  <option selected disabled>Add Ingredient</option>
+                  <option selected >Add Ingredient</option>
                   {
                     notSelectedIngredients().map((i) =>
                     <option value={i.id}>{i.name}</option>)
