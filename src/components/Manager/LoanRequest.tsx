@@ -21,7 +21,7 @@ export default function LoanRequest() {
     return (
         <div class="flex flex-row gap-3 items-center justify-end">
             <p>Take out a loan: </p>
-            <input ref={ref} type="number" class="input input-bordered input-sm"/>
+            <input ref={ref} type="number" class="input input-bordered input-sm" min={0} />
             <button class="btn btn-secondary" onClick={handleTakeLoan}>
                 Add to Balance
             </button>
