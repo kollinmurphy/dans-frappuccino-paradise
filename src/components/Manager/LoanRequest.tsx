@@ -2,13 +2,6 @@
 
 import takeLoan from "@data/api/admin/loan"
 
-// export interface Props {
-//   tag?: string;
-// }
-
-// const { drink, tag } = Astro.props;
-
-
 export default function LoanRequest() {
     let ref: HTMLInputElement | undefined
 
@@ -19,11 +12,11 @@ export default function LoanRequest() {
     }
 
     return (
-        <div class="flex flex-row gap-3 items-center justify-end">
+        <div class="flex flex-row gap-3 items-center justify-end pt-2">
             <p>Take out a loan: </p>
             <input ref={ref} type="number" class="input input-bordered input-sm" min={0} />
-            <button class="btn btn-secondary" onClick={handleTakeLoan}>
-                Add to Balance
+            <button class="btn btn-secondary btn-sm" onClick={handleTakeLoan}>
+                Take out Loan
             </button>
         </div>
     )
