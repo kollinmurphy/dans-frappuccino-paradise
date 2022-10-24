@@ -4,6 +4,8 @@ import { getProduct } from "@data/api/products/get";
 import Layout from "@layouts/Layout.astro";
 import DrinkCustomization from "@components/DrinkCustomization";
 import { authenticate } from "@utils/auth";
+import { CONFIG_LARGE_BASE, CONFIG_MEDIUM_BASE, CONFIG_PERCENT_MARKUP, CONFIG_SMALL_BASE, getConfig } from "@utils/db";
+import { DrinkConfig } from "@data/types/drinkConfig";
 
 const { id } = Astro.params as { id: number };
 const account = authenticate(Astro.cookies);
@@ -12,16 +14,21 @@ const product = await getProduct(id);
 if (!product) return Astro.redirect("/404");
 
 const allIngredients = await getIngredients({ hidden: false });
+
+const config: DrinkConfig = {
+  percentModifier: await getConfig(CONFIG_PERCENT_MARKUP, 1.50),
+  smallBasePrice: await getConfig(CONFIG_SMALL_BASE, 1),
+  mediumBasePrice: await getConfig(CONFIG_MEDIUM_BASE, 2),
+  largeBasePrice: await getConfig(CONFIG_LARGE_BASE, 3),
+}
 ---
 
 <Layout>
   <h1>{product.name}</h1>
-  
-    
     <DrinkCustomization
       client:load
       allIngredients={allIngredients}
       product={product}
+      config={config}
     />
-  
 </Layout>

@@ -1,12 +1,15 @@
 /* @jsxImportSource solid-js */
 
+import { DrinkConfig } from "@data/types/drinkConfig";
 import { Ingredient, Product } from "@data/types/product"
+import { numToPrice } from "@utils/strings";
 import { createEffect, createSignal, Show } from "solid-js";
 import CoffeeIcon from "./CoffeeIcon";
 
 type Props = {
   product: Product;
   allIngredients: Array<Ingredient>;
+  config: DrinkConfig;
 }
 
 type DrinkIngredient = Pick<Ingredient, 'id' | 'name' | 'price' | 'hidden'> & { quantity: number };
@@ -26,9 +29,29 @@ export default function DrinkCustomization(props: Props) {
   const notSelectedIngredients = () => props.allIngredients
     .filter(i => !ingredients().some(si => si.id === i.id))
 
-  createEffect(() => {
-    console.log(ingredients())
-  })
+  const basePrice = () => {
+    switch (size()) {
+      case 'small': return props.config.smallBasePrice * props.config.percentModifier
+      case 'medium': return props.config.mediumBasePrice * props.config.percentModifier
+      case 'large': return props.config.largeBasePrice * props.config.percentModifier
+    }
+  }
+
+  const sizeMultiplier = () => {
+    switch (size()) {
+      case 'small': return 1
+      case 'medium': return 2
+      case 'large': return 3
+    }
+  }
+
+  const addOnPrice = () => {
+    return ingredients().reduce((sum, i) => sum + i.price * i.quantity, 0) * sizeMultiplier()
+  }
+
+  const total = () => {
+    return basePrice() + addOnPrice()
+  }
 
   return (
     <div class="flex flex-col md:flex-row gap-4">
@@ -119,11 +142,11 @@ export default function DrinkCustomization(props: Props) {
             <tbody>
               <tr>
                 <td>Base Price</td>
-                <td>$0.00</td>
+                <td>{numToPrice(basePrice())}</td>
               </tr>
               <tr>
                 <td>Add-ons</td>
-                <td>$0.00</td>
+                <td>{numToPrice(addOnPrice())}</td>
               </tr>
               <tr>
                 <td>Tax</td>
@@ -131,7 +154,7 @@ export default function DrinkCustomization(props: Props) {
               </tr>
               <tr class="font-bold">
                 <td>Total</td>
-                <td>$0.00</td>
+                <td>{numToPrice(total())}</td>
               </tr>
             </tbody>
           </table>

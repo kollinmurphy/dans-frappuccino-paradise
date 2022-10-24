@@ -27,3 +27,7 @@ export const getConfig = async (key: string, defaultValue: number) => {
 }
 
 export const CONFIG_STORE_BALANCE = 'balance'
+export const CONFIG_PERCENT_MARKUP = 'percentPriceModifier'
+export const CONFIG_SMALL_BASE = 'smallBasePrice'
+export const CONFIG_MEDIUM_BASE = 'mediumBasePrice'
+export const CONFIG_LARGE_BASE = 'largeBasePrice'
