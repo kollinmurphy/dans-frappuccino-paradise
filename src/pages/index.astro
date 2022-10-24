@@ -7,7 +7,7 @@ import Carousel from '@components/Carousel';
 
 const account = authenticate(Astro.cookies);
 
-const drinks = (await getProducts()).slice(0, 2)
+const drinks = (await getProducts()).filter(p => p.name.includes('Pumpkin') || p.name.includes('Matcha'))
 ---
 
 <Layout title="">
