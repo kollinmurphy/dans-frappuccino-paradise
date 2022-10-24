@@ -6,6 +6,7 @@ import { authenticate } from "@utils/auth";
 import Inventory from "@components/Manager/Inventory";
 import { CONFIG_STORE_BALANCE, getConfig } from "@utils/db";
 import { numToPrice } from "@utils/strings";
+import UserRoleForm from "@components/Manager/UserRoleForm";
 
 const account = authenticate(Astro.cookies);
 
@@ -29,16 +30,5 @@ const storeBalanceString = numToPrice(storeBalance)
     <Inventory client:idle ingredients={ingredients} />
   </div>
 
-  <div class='flex flex-col gap-2 w-full md:w-[40%]'>
-    <h3 class = "text-4xl mt-6 mb-2">Edit user role:</h3>
-    <input type="text" placeholder="Enter Username" class="input w-full" />
-    <select class="select w-full">
-      <option selected disabled>choose a role</option>
-      <option>user</option>
-      <option>employee</option>
-      <option>manager</option>
-    </select>
-    <button class="btn btn-primary">Submit</button>
-  </div>
-
+  <UserRoleForm client:idle />
 </Layout>

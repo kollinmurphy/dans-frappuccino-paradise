@@ -9,19 +9,18 @@ export interface Props {
 const { drink, tag } = Astro.props;
 ---
 
-<div
-  class="card w-96 bg-[#cdcdcd] hover:bg-white transition-colors duration-500 shadow-xl"
->
-  <figure class="px-10 pt-10">
-    <img src={drink.imageUrl} alt="Drink" class="rounded-xl" />
-  </figure>
-  <div class="card-body items-center text-center">
-    <h2 class="card-title">
-      {drink.name}
-      {tag ? <div class="badge badge-secondary">{tag}</div> : null}
-    </h2>
-    <div class="card-actions">
-      <a href={`/products/${drink.id}`} class="btn btn-primary">Add to Cart</a>
+<a href={`/products/${drink.id}`}>
+  <div
+    class="card w-96 bg-white hover:bg-primary transition-colors duration-500 shadow-xl"
+  >
+    <figure class="px-10 pt-10">
+      <img src={drink.imageUrl} alt="Drink" class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center">
+      <h2 class="card-title">
+        {drink.name}
+        {tag ? <div class="badge badge-secondary">{tag}</div> : null}
+      </h2>
     </div>
   </div>
-</div>
+</a>

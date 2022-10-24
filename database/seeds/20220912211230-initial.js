@@ -27,6 +27,34 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        username: 'kollin',
+        role: 'manager',
+        password: await hash('password123'),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: 'trenton',
+        role: 'manager',
+        password: await hash('password123'),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: 'john',
+        role: 'manager',
+        password: await hash('password123'),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        username: 'caden',
+        role: 'manager',
+        password: await hash('password123'),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ])
   },
 
