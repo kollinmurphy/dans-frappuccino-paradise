@@ -6,7 +6,7 @@ const Order = (sequelize: Sequelize) => {
   class Order extends Model<InferAttributes<Order>, InferCreationAttributes<Order>> {
     declare accountId: number;
     declare paid: boolean;
-    declare status: 'created' | 'cancelled' | 'fulfilled';
+    declare status: 'created' | 'purchased' | 'cancelled' | 'fulfilled';
     declare createdAt: Date;
     declare updatedAt: Date;
   }
@@ -21,7 +21,7 @@ const Order = (sequelize: Sequelize) => {
         allowNull: false,
       },
     status: {
-      type: DataTypes.ENUM('created', 'cancelled', 'fulfilled'),
+      type: DataTypes.ENUM('created', 'purchased', 'cancelled', 'fulfilled'),
       allowNull: false,
     },
     createdAt: DataTypes.DATE,
