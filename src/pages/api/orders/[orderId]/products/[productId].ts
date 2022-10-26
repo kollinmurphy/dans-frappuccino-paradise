@@ -24,12 +24,10 @@ export const addProductToOrder: AuthorizedHandler<
   if (!order) throw new NotFoundError("order not found");
   if (order.accountId !== user.id)
     throw new ForbiddenError("Insufficient permissions");
-  if (typeof orderId !== "number" || typeof productId !== "number")
-    throw new InvalidRequestError("Ids must be numbers");
   const op = await db.OrderProduct.create(
     {
-      productId,
-      orderId,
+      productId: parseInt(productId as string),
+      orderId: parseInt(orderId as string),
       size: body.size,
     },
     { include: [db.OrderProductIngredient] }
@@ -45,4 +43,4 @@ export const addProductToOrder: AuthorizedHandler<
   });
 };
 
-export const get = authorizedWrapper(addProductToOrder);
+export const post = authorizedWrapper(addProductToOrder);
