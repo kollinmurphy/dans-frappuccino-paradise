@@ -5,6 +5,7 @@ import {
   CONFIG_MEDIUM_BASE,
   CONFIG_PERCENT_MARKUP,
   CONFIG_SMALL_BASE,
+  CONFIG_STORE_BALANCE,
   getConfig,
 } from "@utils/db";
 import wrapper, {
@@ -133,13 +134,20 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
   }
 
   await db.sequelize.transaction(async (t) => {
-    await order.update({ status: "purchased" }, { transaction: t });
+    await order.update({ status: "purchased", total }, { transaction: t });
     await account.update(
       { balance: account.balance - total },
       { transaction: t }
     );
+    const [config, created] = await db.StoreConfig.findOrCreate({
+      where: { key: CONFIG_STORE_BALANCE },
+      defaults: { value: total },
+      transaction: t,
+    })
+    if (!created)
+      await config.update({ value: config.value + total }, { transaction: t });
     for (const i of ingredientsMap.keys()) {
-      const ingredient = await db.Ingredient.findByPk(i);
+      const ingredient = await db.Ingredient.findByPk(i, { transaction: t });
       if (!ingredient) throw new NotFoundError("ingredient not found");
       await ingredient.update(
         {

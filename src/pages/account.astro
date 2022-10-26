@@ -3,16 +3,42 @@ import Layout from "@layouts/Layout.astro";
 import { authenticate } from "@utils/auth";
 import AddMoneyForm from "@components/AddMoneyForm";
 import db from "@database";
+import OrderHistory from "@components/OrderHistory";
+import type { Order as OrderModel } from "@data/types/order";
 
 const account = authenticate(Astro.cookies);
 if (!account) return Astro.redirect("/signin");
 const newAccount = await db.Account.findByPk(account.id);
 if (!newAccount) return Astro.redirect("/404");
 const balance = Math.round(newAccount.balance * 100) / 100;
+
+const orders = await db.Order.findAll({
+  where: {
+    accountId: account.id,
+  },
+  order: [["createdAt", "DESC"]],
+  include: [
+    {
+      model: db.OrderProduct,
+      include: [
+        db.Product,
+        {
+          model: db.OrderProductIngredient,
+          include: [
+            {
+              model: db.Ingredient,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+});
 ---
 
 <Layout title="Account">
   <h1>Welcome, {account.username}!</h1>
 
   <AddMoneyForm balance={balance} client:idle />
+  <OrderHistory client:idle orders={orders.map(o => o.get({ plain: true })) as unknown as Array<OrderModel>} />
 </Layout>

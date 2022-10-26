@@ -2,8 +2,9 @@ import { Ingredient, Product } from "./product";
 
 export type Order = {
   id: number;
-  status: 'created' | 'cancelled' | 'fulfilled';
+  status: 'created' | 'cancelled' | 'fulfilled' | 'purchased';
   paid: boolean;
+  total?: number;
   createdAt: string;
   updatedAt: string;
   OrderProducts: Array<OrderProduct>;

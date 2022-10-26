@@ -62,6 +62,7 @@ Order.belongsTo(Account);
 Order.hasMany(OrderProduct);
 
 OrderProduct.belongsTo(Order);
+OrderProduct.belongsTo(Product);
 OrderProduct.hasMany(OrderProductIngredient);
 
 OrderProductIngredient.belongsTo(OrderProduct);
