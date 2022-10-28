@@ -13,6 +13,7 @@ import wrapper, {
   authorizedWrapper,
   ForbiddenError,
   Handler,
+  InvalidRequestError,
   NotFoundError,
 } from "@utils/wrapper";
 
@@ -64,6 +65,9 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
     throw new ForbiddenError("order does not belong to account");
   if (order.status !== "created")
     throw new ForbiddenError("order is not in created status");
+  // @ts-ignore
+  if (order.OrderProducts.length !== 1)
+    throw new ForbiddenError("order must have one product");
 
   // @ts-ignore
   const ingredients = order.OrderProducts.map((op) =>
@@ -72,6 +76,37 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
       quantity: opi.quantity * getMultiplierFromSize(op.size),
     }))
   ).flat();
+
+  // TODO add hidden ingredients
+
+  // @ts-ignore
+  const size = order.OrderProducts[0].size
+
+  const hiddenInventory = await db.Ingredient.findAll({
+    where: {
+      hidden: true,
+    },
+  });
+  const cups = []
+  for (const hiddenIngredient of hiddenInventory) {
+    const name = hiddenIngredient.name.toLowerCase()
+    if (name.includes('small') || name.includes('medium') || name.includes('large'))
+      cups.push(hiddenIngredient.get({ plain: true }))
+    else if (hiddenIngredient.name.toLowerCase().includes("coffee"))
+      ingredients.push({
+        ...hiddenIngredient.get({ plain: true }),
+        // @ts-ignore
+        quantity: getMultiplierFromSize(size),
+      })
+    else
+      ingredients.push({
+        ...hiddenIngredient.get({ plain: true }),
+        quantity: 1,
+      })
+  }
+
+  const cup = cups.find(cup => cup.name.toLowerCase().includes(size))
+  ingredients.push({ ...cup, quantity: 1 })
 
   const config: DrinkConfig = {
     percentModifier: await getConfig(CONFIG_PERCENT_MARKUP, 1.5),
@@ -120,6 +155,9 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
         config.percentModifier *
         100
     ) / 100;
+  console.log(ingredients)
+  if (!total)
+    throw new InvalidRequestError(`total is ${total}, something went wrong`);
   if (total > account.balance) throw new ForbiddenError("Insufficient funds.");
 
   for (const i of ingredientsMap.keys()) {

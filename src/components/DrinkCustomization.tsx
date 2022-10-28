@@ -21,6 +21,10 @@ type DrinkIngredient = Pick<Ingredient, "id" | "name" | "price" | "hidden"> & {
 };
 
 export default function DrinkCustomization(props: Props) {
+  const notHiddenIngredients = () =>
+    props.allIngredients.filter((i) => !i.hidden);
+  const hiddenIngredients = () => props.allIngredients.filter((i) => i.hidden);
+
   const [ingredients, setIngredients] = createSignal<DrinkIngredient[]>(
     props.product.ProductIngredients.map((pi) => ({
       id: pi.Ingredient.id,
@@ -36,18 +40,32 @@ export default function DrinkCustomization(props: Props) {
   let ingredientRef: HTMLSelectElement | undefined;
 
   const notSelectedIngredients = () =>
-    props.allIngredients.filter(
+    notHiddenIngredients().filter(
       (i) => !ingredients().some((si) => si.id === i.id)
     );
 
   const basePrice = () => {
+    const hiddenPrice = hiddenIngredients().reduce(
+      (sum, i) => {
+        const name = i.name.toLowerCase()
+        if (name.includes('small') || name.includes('medium') || name.includes('large')) {
+          if (name.includes(size()))
+            return sum + i.price
+          return sum
+        } else if (name.includes('coffee')) {
+          return sum + i.price * sizeMultiplier()
+        }
+        return sum + i.price
+      },
+      0
+    );
     switch (size()) {
       case "small":
-        return props.config.smallBasePrice * props.config.percentModifier;
+        return (props.config.smallBasePrice + hiddenPrice) * props.config.percentModifier;
       case "medium":
-        return props.config.mediumBasePrice * props.config.percentModifier;
+        return (props.config.mediumBasePrice + hiddenPrice) * props.config.percentModifier;
       case "large":
-        return props.config.largeBasePrice * props.config.percentModifier;
+        return (props.config.largeBasePrice + hiddenPrice) * props.config.percentModifier;
     }
   };
 

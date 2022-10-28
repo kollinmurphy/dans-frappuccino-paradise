@@ -13,7 +13,7 @@ if (!account) return Astro.redirect("/signin");
 const product = await getProduct(id);
 if (!product) return Astro.redirect("/404");
 
-const allIngredients = await getIngredients({ hidden: false });
+const allIngredients = await getIngredients({ hidden: true });
 
 const config: DrinkConfig = {
   percentModifier: await getConfig(CONFIG_PERCENT_MARKUP, 1.50),
