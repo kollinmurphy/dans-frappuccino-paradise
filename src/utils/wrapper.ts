@@ -1,5 +1,4 @@
 import { Account } from "@data/types/account";
-import db from "@database";
 import { APIRoute, Params } from "astro";
 import { verifyToken } from "./auth";
 
