@@ -104,6 +104,7 @@ export default function DrinkCustomization(props: Props) {
         })),
       });
       await placeOrder({ orderId: order.id });
+      // window.location.href = "/account?purchased=true";
     } catch (err) {
       setError(err.message);
     }
