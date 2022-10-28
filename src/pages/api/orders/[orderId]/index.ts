@@ -155,7 +155,6 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
         config.percentModifier *
         100
     ) / 100;
-  console.log(ingredients)
   if (!total)
     throw new InvalidRequestError(`total is ${total}, something went wrong`);
   if (total > account.balance) throw new ForbiddenError("Insufficient funds.");
@@ -196,6 +195,9 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
       );
     }
   });
+
+  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  await sleep(1000)
 
   return {
     success: true,
