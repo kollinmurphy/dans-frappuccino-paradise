@@ -196,9 +196,6 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
     }
   });
 
-  const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-  await sleep(1000)
-
   return {
     success: true,
     total,
