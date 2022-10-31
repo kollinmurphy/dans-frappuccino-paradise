@@ -4,6 +4,7 @@ export type UserSearchResult = {
   id: number;
   username: string;
   role: "user" | "employee" | "manger";
+  balance: number;
 };
 
 const searchUsers = async (data: { username: string }): Promise<UserSearchResult[]> =>

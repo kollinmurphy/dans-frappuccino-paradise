@@ -9,6 +9,7 @@ const addProductToOrder = async (data: {
     quantity: number;
   }>;
   size: "small" | "medium" | "large";
+  userId?: number;
 }): Promise<OrderProduct> =>
   runApiCall({
     method: "POST",
@@ -16,6 +17,7 @@ const addProductToOrder = async (data: {
   }, {
     ingredients: data.ingredients,
     size: data.size,
+    userId: data.userId,
   });
 
 export default addProductToOrder;

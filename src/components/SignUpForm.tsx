@@ -16,7 +16,7 @@ const SignUpForm = () => {
       if (!username || !password)
         throw new Error('Please enter a username and a password.')
       const account = await createAccount({ username, password })
-      document.cookie = `token=${account.token}`
+      document.cookie = `token=${account.token};path=/;`
       window.location.href= '/account'
     } catch (err) {
       setError(err.message)
