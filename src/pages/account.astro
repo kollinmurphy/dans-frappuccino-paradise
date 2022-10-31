@@ -24,11 +24,7 @@ const orders = await db.Order.findAll({
         db.Product,
         {
           model: db.OrderProductIngredient,
-          include: [
-            {
-              model: db.Ingredient,
-            },
-          ],
+          include: [db.Ingredient],
         },
       ],
     },

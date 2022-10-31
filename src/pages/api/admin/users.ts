@@ -1,6 +1,6 @@
 import { AccountRole } from "@data/types/account";
 import db from "@database";
-import { adminWrapper, AuthorizedHandler } from "@utils/wrapper";
+import { adminWrapper, AuthorizedHandler, employeeWrapper } from "@utils/wrapper";
 import { Op } from "sequelize";
 
 type SearchUsersInput = {
@@ -13,13 +13,13 @@ export const searchUsers: AuthorizedHandler<SearchUsersInput> = async ({
   const { username } = body;
   const users = await db.Account.findAll({
     where: { username: { [Op.like]: `%${username}%` } },
-    attributes: ["id", "username", "role"],
+    attributes: ["id", "username", "role", "balance"],
     limit: 5,
   });
   return users;
 };
 
-export const post = adminWrapper(searchUsers);
+export const post = employeeWrapper(searchUsers);
 
 type UpdateUserRoleInput = {
   id: number;

@@ -1,7 +1,7 @@
 /* @jsxImportSource solid-js */
 
 import addFunds from "@data/api/accounts/addFunds";
-import { Account } from "@data/types/account";
+import { numToPrice } from "@utils/strings";
 import { createSignal } from "solid-js";
 
 export default function AddMoneyForm(props: { balance: number }) {
@@ -10,7 +10,7 @@ export default function AddMoneyForm(props: { balance: number }) {
   return (
     <div class="flex flex-col gap-2">
       <div>
-        You currently have <span class='font-bold'>${props.balance || 0}</span> in your account.
+        You currently have <span class='font-bold'>{numToPrice(props.balance || 0)}</span> in your account.
       </div>
       <div class="flex flex-row gap-2 items-center">
         <span>Money to add</span>

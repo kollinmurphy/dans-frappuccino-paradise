@@ -3,17 +3,20 @@
 import addProductToOrder from "@data/api/orders/addProduct";
 import createOrder from "@data/api/orders/create";
 import placeOrder from "@data/api/orders/placeOrder";
+import { AccountRole } from "@data/types/account";
 import { DrinkConfig } from "@data/types/drinkConfig";
 import { Ingredient, Product } from "@data/types/product";
 import { numToPrice } from "@utils/strings";
-import { createEffect, createSignal, Show } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import CoffeeIcon from "./CoffeeIcon";
 import ErrorAlert from "./ErrorAlert";
+import MenuUserSelector from "./MenuUserSelector";
 
 type Props = {
   product: Product;
   allIngredients: Array<Ingredient>;
   config: DrinkConfig;
+  accountRole: AccountRole;
 };
 
 type DrinkIngredient = Pick<Ingredient, "id" | "name" | "price" | "hidden"> & {
@@ -36,6 +39,7 @@ export default function DrinkCustomization(props: Props) {
   );
   const [size, setSize] = createSignal<"small" | "medium" | "large">("small");
   const [error, setError] = createSignal<string | null>(null);
+  const [selectedUser, setSelectedUser] = createSignal<number | null>(null);
 
   let ingredientRef: HTMLSelectElement | undefined;
 
@@ -45,27 +49,36 @@ export default function DrinkCustomization(props: Props) {
     );
 
   const basePrice = () => {
-    const hiddenPrice = hiddenIngredients().reduce(
-      (sum, i) => {
-        const name = i.name.toLowerCase()
-        if (name.includes('small') || name.includes('medium') || name.includes('large')) {
-          if (name.includes(size()))
-            return sum + i.price
-          return sum
-        } else if (name.includes('coffee')) {
-          return sum + i.price * sizeMultiplier()
-        }
-        return sum + i.price
-      },
-      0
-    );
+    const hiddenPrice = hiddenIngredients().reduce((sum, i) => {
+      const name = i.name.toLowerCase();
+      if (
+        name.includes("small") ||
+        name.includes("medium") ||
+        name.includes("large")
+      ) {
+        if (name.includes(size())) return sum + i.price;
+        return sum;
+      } else if (name.includes("coffee")) {
+        return sum + i.price * sizeMultiplier();
+      }
+      return sum + i.price;
+    }, 0);
     switch (size()) {
       case "small":
-        return (props.config.smallBasePrice + hiddenPrice) * props.config.percentModifier;
+        return (
+          (props.config.smallBasePrice + hiddenPrice) *
+          props.config.percentModifier
+        );
       case "medium":
-        return (props.config.mediumBasePrice + hiddenPrice) * props.config.percentModifier;
+        return (
+          (props.config.mediumBasePrice + hiddenPrice) *
+          props.config.percentModifier
+        );
       case "large":
-        return (props.config.largeBasePrice + hiddenPrice) * props.config.percentModifier;
+        return (
+          (props.config.largeBasePrice + hiddenPrice) *
+          props.config.percentModifier
+        );
     }
   };
 
@@ -93,7 +106,7 @@ export default function DrinkCustomization(props: Props) {
   const handlePlaceOrder = async () => {
     setError(null);
     try {
-      const order = await createOrder();
+      const order = await createOrder(selectedUser());
       await addProductToOrder({
         orderId: order.id,
         productId: props.product.id,
@@ -102,8 +115,9 @@ export default function DrinkCustomization(props: Props) {
           ingredientId: i.id,
           quantity: i.quantity,
         })),
+        userId: selectedUser(),
       });
-      await placeOrder({ orderId: order.id });
+      await placeOrder({ orderId: order.id, userId: selectedUser() });
       window.location.href = "/account?purchased=true";
     } catch (err) {
       setError(err.message);
@@ -256,6 +270,12 @@ export default function DrinkCustomization(props: Props) {
             <button class="btn btn-secondary" onClick={handlePlaceOrder}>
               Place order
             </button>
+            <Show when={props.accountRole !== "user"}>
+              <MenuUserSelector
+                selectedUser={selectedUser()}
+                setSelectedUser={setSelectedUser}
+              />
+            </Show>
           </div>
         </div>
       </div>

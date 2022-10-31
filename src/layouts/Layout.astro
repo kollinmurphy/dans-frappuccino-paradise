@@ -105,7 +105,15 @@ export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost";
             ))
           }
           <div class="ml-4">
-            <SignOutButton client:idle />
+            {
+              account ? (
+                <SignOutButton client:idle />
+              ) : (
+                <a href="/signin" class={BUTTON_CLASSES}>
+                  Sign In
+                </a>
+              )
+            }
           </div>
         </ul>
       </div>

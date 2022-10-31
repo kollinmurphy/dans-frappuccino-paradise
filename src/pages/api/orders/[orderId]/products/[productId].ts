@@ -1,10 +1,8 @@
-import { ProductIngredient } from "@data/types/product";
 import db from "@database";
 import {
   AuthorizedHandler,
   authorizedWrapper,
   ForbiddenError,
-  InvalidRequestError,
   NotFoundError,
 } from "@utils/wrapper";
 
@@ -14,6 +12,7 @@ type AddProductToOrderInput = {
     quantity: number;
   }>;
   size: "small" | "medium" | "large";
+  userId?: number;
 };
 
 export const addProductToOrder: AuthorizedHandler<
@@ -22,7 +21,9 @@ export const addProductToOrder: AuthorizedHandler<
   const { orderId, productId } = params;
   const order = await db.Order.findByPk(orderId);
   if (!order) throw new NotFoundError("order not found");
-  if (order.accountId !== user.id)
+  if (body.userId && user.role === "user")
+    throw new ForbiddenError("You do not have permission to add a product to an order for another user");
+  if (order.accountId !== (body.userId || user.id))
     throw new ForbiddenError("Insufficient permissions");
   const op = await db.OrderProduct.create(
     {

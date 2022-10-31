@@ -39,10 +39,14 @@ const getMultiplierFromSize = (size: "small" | "medium" | "large") => {
   }
 };
 
-type PlaceOrderInput = {};
+type PlaceOrderInput = {
+  userId?: number;
+};
+
 const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
   params,
   user,
+  body,
 }) => {
   const orderId = params.orderId;
   const order = await db.Order.findByPk(orderId, {
@@ -58,16 +62,20 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
       },
     ],
   });
+  if (body.userId && user.role === 'user')
+    throw new ForbiddenError('You do not have permission to place an order for another user');
   if (!order) throw new NotFoundError("order not found");
   const account = await db.Account.findByPk(user.id);
   if (!account) throw new ForbiddenError("account not found");
-  if (order.accountId !== account.id)
+  if (order.accountId !== (body.userId || account.id))
     throw new ForbiddenError("order does not belong to account");
   if (order.status !== "created")
     throw new ForbiddenError("order is not in created status");
   // @ts-ignore
   if (order.OrderProducts.length !== 1)
     throw new ForbiddenError("order must have one product");
+
+  const behalfOfAccount = await db.Account.findByPk(body.userId || account.id);
 
   // @ts-ignore
   const ingredients = order.OrderProducts.map((op) =>
@@ -157,7 +165,7 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
     ) / 100;
   if (!total)
     throw new InvalidRequestError(`total is ${total}, something went wrong`);
-  if (total > account.balance) throw new ForbiddenError("Insufficient funds.");
+  if (total > behalfOfAccount.balance) throw new ForbiddenError("Insufficient funds.");
 
   for (const i of ingredientsMap.keys()) {
     const ingredient = await db.Ingredient.findByPk(i);
@@ -172,8 +180,8 @@ const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
 
   await db.sequelize.transaction(async (t) => {
     await order.update({ status: "purchased", total }, { transaction: t });
-    await account.update(
-      { balance: account.balance - total },
+    await behalfOfAccount.update(
+      { balance: behalfOfAccount.balance - total },
       { transaction: t }
     );
     const [config, created] = await db.StoreConfig.findOrCreate({
