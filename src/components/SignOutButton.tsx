@@ -1,10 +1,9 @@
 /* @jsxImportSource solid-js */
 
-function delete_cookie( name, path, domain ) {
+function delete_cookie( name, path ) {
   if( get_cookie( name ) ) {
     document.cookie = name + "=" +
       ((path) ? ";path="+path:"")+
-      ((domain)?";domain="+domain:"") +
       ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
   }
 }
@@ -18,8 +17,7 @@ function get_cookie(name){
 const SignOutButton = () => {
   return (
     <div class='btn btn-secondary btn-xs' onClick={() => {
-      // document.cookie = 'token='
-      delete_cookie('token', '/', 'localhost')
+      delete_cookie('token', '/')
       window.location.href = '/'
     }}>
       Sign Out
