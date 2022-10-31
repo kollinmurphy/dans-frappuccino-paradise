@@ -1,13 +1,40 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { authenticate } from "@utils/auth";
+import db from "@database";
+import UnfulfilledOrders from "@components/UnfulfilledOrders";
+import type { Order as OrderModel } from "@data/types/order";
+
 
 const account = authenticate(Astro.cookies)
+
+const orders = await db.Order.findAll({
+  where: {
+    status: 'purchased',
+  },
+  order: [["createdAt", "ASC"]],
+  include: [
+    {
+      model: db.OrderProduct,
+      include: [
+        db.Product,
+        {
+          model: db.OrderProductIngredient,
+          include: [
+            {
+              model: db.Ingredient,
+            },
+          ],
+        },
+      ],
+    },
+  ],
+});
 
 if (!account || account.role === 'user')
   return Astro.redirect('/404')
 ---
 
-<Layout title='Admin'>
-  <h2 class='text-4xl'>Welcome to the secret employee page.</h2>
+<Layout title='Employee'>
+  <UnfulfilledOrders client:idle orders={orders.map(o => o.get({ plain: true })) as unknown as Array<OrderModel>} />
 </Layout>
