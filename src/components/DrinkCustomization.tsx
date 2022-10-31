@@ -118,7 +118,8 @@ export default function DrinkCustomization(props: Props) {
         userId: selectedUser(),
       });
       await placeOrder({ orderId: order.id, userId: selectedUser() });
-      window.location.href = "/account?purchased=true";
+      if (selectedUser()) window.location.href = "/menu";
+      else window.location.href = "/account?purchased=true";
     } catch (err) {
       setError(err.message);
     }

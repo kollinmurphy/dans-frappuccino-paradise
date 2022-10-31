@@ -1,5 +1,6 @@
 /* @jsxImportSource solid-js */
 
+// https://stackoverflow.com/questions/2144386/how-to-delete-a-cookie
 function delete_cookie( name, path ) {
   if( get_cookie( name ) ) {
     document.cookie = name + "=" +
