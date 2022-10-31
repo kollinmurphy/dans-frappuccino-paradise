@@ -30,10 +30,9 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 			1. Create an Order if there is no unpaid order for the associated Account
 			2. Add an OrderProduct to the Order
 			3. Add any applicable OrderAddOns to the OrderProducts
-	3. The Account has a Cart, which displays the Products and their associated AddOns from the Account’s most recent unpaid Order
-		1. Products can be removed from the Cart
-	4. The Cart has a Place Order button
-		1. Following a successful purchase, the Account is directed to an Order page which displays the current fulfillment status of the Order
+	3. The Product Page has a Place Order button
+		1. Following a successful purchase, the User is directed to the Accounts page that shows recent Orders and the current fulfillment status of the Order
+		2. Employees can order on behalf of another User on this page
 3. **User Home**
 	1. The User Home is accessible by an Account of any Role
 	2. This page presents the user with a list of their orders, sorted by createdAt descending
