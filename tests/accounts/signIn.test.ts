@@ -22,7 +22,27 @@ describe("Sign In", () => {
         })
         expect(result.token).toBeDefined()
         expect(result.username).toBe(account.username)
-    })
+    });
+
+    test("throws an error when account is not found", async () => {
+        await expect(() =>
+            login({
+                body: { username: "AAAAAAAAAAAAAA", password: "A"},
+                params: {}
+            })
+
+        ).rejects.toThrow("Unable to find account")
+    });
+
+    test("throws an error when password is incorrect", async () => {
+        await expect(() =>
+            login({
+                body: { username: account.username, password: "AAAAAAAAAAAAAAA"},
+                params: {}
+            })
+
+        ).rejects.toThrow("Invalid credentials")
+    });
 
 
 })
