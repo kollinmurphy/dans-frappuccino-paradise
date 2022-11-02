@@ -1,71 +1,65 @@
 /* @jsxImportSource solid-js */
 
-import updateOrderStatus from "@data/api/orders/updateOrderStatus";
+import updateHours from "@data/api/employee/updateHours";
+import { numToPrice } from "@utils/strings";
 import { Order } from "@data/types/order";
+import { Hours } from "@data/types/hours"
 import { Show } from "solid-js";
 
 type Props = {
-  hours: Array<Order>;
+  hours: Hours[];
 };
 
-export default function HoursLog(props: Props) {
+const PAY_RATE = 15 / 60;
+
+export default function Payroll(props: Props) {
+  const data = () => {
+    const data = props.hours.reduce((map, hour) => {
+      if (!map.has(hour.accountId)) {
+        return map.set(hour.accountId, {
+          minutes: hour.minutesWorked,
+          payRate: PAY_RATE * 60,
+          pay: PAY_RATE * hour.minutesWorked,
+        });
+      }
+      const acc = map.get(hour.accountId);
+      return map.set(hour.accountId, {
+        ...acc,
+        minutes: acc.minutes + hour.minutesWorked,
+        pay: acc.pay + PAY_RATE * hour.minutesWorked,
+      });
+    }, new Map<number, { minutes: number; payRate: number; pay: number }>());
+    return [...data.values()]
+  }
+
   return (
-    <div>
-      <h2 class="text-2xl my-4 font-bold">Worked Hours</h2>
-      {/* <table class="table table-zebra">
+    <div class='w-full'>
+      <h1 class="text-3xl my-2">Work History</h1>
+      <table class="table table-zebra w-full">
         <thead>
           <tr>
-            <th>Order</th>
-            <th>Date</th>
-            <th>Total</th>
-            <th>Purchase</th>
-            <th></th>
+            <th>Hours</th>
+            <th>Pay Rate</th>
+            <th>Paid</th>
           </tr>
         </thead>
         <tbody>
-          <Show when={props.orders.length > 0} fallback={(
+          <Show when={data().length > 0} fallback={(
             <tr>
-              <td colspan="5">No unfulfilled orders!</td>
+              <td colspan={4}>No hours logged</td>
             </tr>
           )}>
-            {props.orders.map((order) => (
+            {data().map((row) => (
               <tr>
-                <td>#{order.id}</td>
-                <td>
-                  {(order.createdAt as unknown as Date).toLocaleDateString()}{" "}
-                  {(order.createdAt as unknown as Date).toLocaleTimeString()}
-                </td>
-                <td class="text-lg">{numToPrice(order.total || 0)}</td>
-                <td>
-                  {order.OrderProducts.map((op) => (
-                    <div>
-                      <div class="font-bold">{op.Product.name}</div>
-                      <ul class="ml-6">
-                        {op.OrderProductIngredients.map((opi) => (
-                          <li class="list-disc">
-                            {opi.Ingredient.name} x {opi.quantity}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </td>
-                <td>
-                  <button
-                    class="btn btn-primary"
-                    onClick={async () => {
-                      await updateOrderStatus({ orderId: order.id });
-                      location.reload();
-                    }}
-                  >
-                    Fulfill Order
-                  </button>
-                </td>
+                <td>{row.minutes / 60}</td>
+                <td>{numToPrice(row.payRate)}</td>
+                <td>{numToPrice(row.pay)}</td>
               </tr>
             ))}
           </Show>
         </tbody>
-      </table> */}
+      </table>
+      
     </div>
   );
 }

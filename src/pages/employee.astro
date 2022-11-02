@@ -5,8 +5,7 @@ import db from "@database";
 import UnfulfilledOrders from "@components/UnfulfilledOrders";
 import HoursLog from "@components/HoursLog";
 import type { Order as OrderModel } from "@data/types/order";
-import type { Hours as HoursModel } from "@data/types/hours";
-
+import type {Hours} from "@data/types/hours"
 
 const account = authenticate(Astro.cookies)
 
@@ -35,11 +34,7 @@ const orders = await db.Order.findAll({
 
 const hours = await db.Hours.findAll({
   order: [["createdAt", "ASC"]],
-  include: [
-    {
-      model: db.Hours,
-    },
-  ],
+  where: {accountId: account.id}
 });
 
 if (!account || account.role === 'user')
@@ -47,6 +42,10 @@ if (!account || account.role === 'user')
 ---
 
 <Layout title='Employee'>
-  <HoursLog client:idle hours={hours.map(o => o.get({ plain: true })) as unknown as Array<HoursModel>} />
-  <UnfulfilledOrders client:idle orders={orders.map(o => o.get({ plain: true })) as unknown as Array<OrderModel>} />
+  <div class='max-w'>
+    <HoursLog client:idle hours={hours.map(o => o.get({ plain: true })) as unknown as Array<Hours>} />
+    
+    <UnfulfilledOrders client:idle orders={orders.map(o => o.get({ plain: true })) as unknown as Array<OrderModel>} />
+  </div>
+  
 </Layout>
