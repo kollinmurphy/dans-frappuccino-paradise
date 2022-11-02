@@ -40,7 +40,7 @@ export default function Payroll(props: Props) {
           <tr>
             <th>Hours</th>
             <th>Pay Rate</th>
-            <th>Paid</th>
+            <th>Total Earned</th>
           </tr>
         </thead>
         <tbody>
