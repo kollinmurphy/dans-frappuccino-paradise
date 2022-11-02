@@ -35,6 +35,7 @@ export default function Inventory(props: Props) {
 
   return (
     <div>
+      <h1 class="text-3xl my-2">Inventory</h1>
       <table class="table table-zebra table-compact w-full my-4">
         <thead>
           <tr>

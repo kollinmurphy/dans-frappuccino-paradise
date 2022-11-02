@@ -31,8 +31,8 @@ export default function UserRoleForm() {
   const disabled = () => loading() || user() === null || role() === null;
 
   return (
-    <div class="flex flex-col gap-2 w-full md:w-[40%]">
-      <h3 class="text-4xl mt-6 mb-2">Edit user role:</h3>
+    <div class="flex flex-col gap-2 w-full">
+      <h1 class="text-3xl my-2">Edit user role</h1>
       <input
         type="text"
         placeholder="Enter Username"

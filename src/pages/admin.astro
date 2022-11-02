@@ -7,6 +7,9 @@ import Inventory from "@components/Manager/Inventory";
 import { CONFIG_STORE_BALANCE, getConfig } from "@utils/db";
 import { numToPrice } from "@utils/strings";
 import UserRoleForm from "@components/Manager/UserRoleForm";
+import db from "@database";
+import Payroll from "@components/Manager/Payroll";
+import { Hours } from "@data/types/hours";
 
 const account = authenticate(Astro.cookies);
 
@@ -14,21 +17,43 @@ if (!account || account.role !== "manager") return Astro.redirect("/404");
 
 const ingredients = await getIngredients({ hidden: true });
 const storeBalance = await getConfig(CONFIG_STORE_BALANCE, 0);
-const storeBalanceString = numToPrice(storeBalance)
+const storeBalanceString = numToPrice(storeBalance);
+
+const hours = (await db.Hours.findAll({
+  where: {
+    paid: false,
+  },
+  include: [
+    {
+      model: db.Account,
+      attributes: ["id", "username"],
+    },
+  ],
+})) as unknown as Hours[];
 ---
 
 <Layout title="Admin">
-  <h2 class="text-4xl mt-6 mb-2">Hey there, {account.username}! Welcome to the manager page.</h2>
-
-  <div class='text-xl'>
-    Current store balance: <span class='font-bold'>{storeBalanceString}</span>
+  <div class='max-w-[1024px]'>
+    <h2 class="text-4xl mt-6 mb-2">
+      Hey there, {account.username}! Welcome to the manager page.
+    </h2>
+  
+    <div class="text-xl">
+      Current store balance: <span class="font-bold">{storeBalanceString}</span>
+    </div>
+  
+    <LoanRequest client:idle />
+  
+    <div class="divider"></div>
+  
+    <Payroll client:idle hours={hours} />
+    <div class="divider"></div>
+  
+    <div class="overflow-x-auto">
+      <Inventory client:idle ingredients={ingredients} />
+    </div>
+    <div class="divider"></div>
+  
+    <UserRoleForm client:idle />
   </div>
-
-  <LoanRequest client:idle />
-
-  <div class="overflow-x-auto">
-    <Inventory client:idle ingredients={ingredients} />
-  </div>
-
-  <UserRoleForm client:idle />
 </Layout>

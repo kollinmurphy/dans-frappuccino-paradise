@@ -56,7 +56,6 @@ AccountFavorite.belongsTo(Account);
 AccountFavorite.belongsTo(OrderProduct);
 
 Hours.belongsTo(Account);
-Hours.belongsTo(Account);
 
 Order.belongsTo(Account);
 Order.hasMany(OrderProduct);
