@@ -161,7 +161,7 @@ export default function DrinkCustomization(props: Props) {
           </div>
         </div>
 
-        <div class="flex flex-row gap-4">
+        <div class="flex flex-col md:flex-row gap-4">
           <div class="overflow-x-auto">
             <table class="table table-zebra w-full">
               <thead>
