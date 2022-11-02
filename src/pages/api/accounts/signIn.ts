@@ -8,7 +8,7 @@ type LoginInput = {
   password: string;
 }
 
-const login: Handler<LoginInput> = async ({ body }) => {
+export const login: Handler<LoginInput> = async ({ body }) => {
   const { username, password } = body
   const account = await db.Account.findOne({
     where: { username, isDeleted: false },
