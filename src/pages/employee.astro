@@ -4,6 +4,7 @@ import { authenticate } from "@utils/auth";
 import db from "@database";
 import UnfulfilledOrders from "@components/UnfulfilledOrders";
 import HoursLog from "@components/HoursLog";
+import AddHoursForm from "@components/AddHoursForm"
 import type { Order as OrderModel } from "@data/types/order";
 import type {Hours} from "@data/types/hours"
 
@@ -43,6 +44,8 @@ if (!account || account.role === 'user')
 
 <Layout title='Employee'>
   <div class='max-w'>
+    <AddHoursForm  client:idle />
+
     <HoursLog client:idle hours={hours.map(o => o.get({ plain: true })) as unknown as Array<Hours>} />
     
     <UnfulfilledOrders client:idle orders={orders.map(o => o.get({ plain: true })) as unknown as Array<OrderModel>} />
