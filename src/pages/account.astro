@@ -5,6 +5,7 @@ import AddMoneyForm from "@components/AddMoneyForm";
 import db from "@database";
 import OrderHistory from "@components/OrderHistory";
 import type { Order as OrderModel } from "@data/types/order";
+import { Op } from "sequelize";
 
 const account = authenticate(Astro.cookies);
 if (!account) return Astro.redirect("/signin");
@@ -15,6 +16,9 @@ const balance = Math.round(newAccount.balance * 100) / 100;
 const orders = await db.Order.findAll({
   where: {
     accountId: account.id,
+    status: {
+      [Op.ne]: 'created',
+    },
   },
   order: [["createdAt", "DESC"]],
   include: [
