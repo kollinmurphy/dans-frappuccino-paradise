@@ -1,6 +1,6 @@
 import runApiCall from "..";
 
-const updateHours = async (data: {
+const addHours = async (data: {
   hoursId: number;
   userId?: number;
 }): Promise<any> =>
@@ -12,4 +12,4 @@ const updateHours = async (data: {
     { userId: data.userId }
   );
 
-export default updateHours;
+export default addHours;

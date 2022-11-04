@@ -1,6 +1,6 @@
 /* @jsxImportSource solid-js */
 
-import updateHours from "@data/api/employee/updateHours";
+import addHours from "@data/api/employee/addHours";
 import { numToPrice } from "@utils/strings";
 import { Order } from "@data/types/order";
 import { Hours } from "@data/types/hours"
@@ -11,6 +11,9 @@ type Props = {
 };
 
 const PAY_RATE = 15 / 60;
+
+
+
 
 export default function Payroll(props: Props) {
   const data = () => {
