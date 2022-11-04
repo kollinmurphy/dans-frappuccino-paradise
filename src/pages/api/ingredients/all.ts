@@ -3,7 +3,7 @@ import wrapper, { Handler } from "@utils/wrapper";
 
 type GetIngredientsInput = {};
 
-const getAllIngredients: Handler<GetIngredientsInput> = async () => {
+export const getAllIngredients: Handler<GetIngredientsInput> = async () => {
   return db.Ingredient.findAll();
 };
 
