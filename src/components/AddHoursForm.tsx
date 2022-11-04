@@ -8,14 +8,17 @@ export default function AddHoursForm() {
   const [hours, setHours] = createSignal(0);
   const [error, setError] = createSignal<string | null>(null);
 
-//   const handleAddHours = async () => {
-//     setError(null);
-//     try {
-        
-//     } catch (err) {
-//       setError(err.message);
-//     }
-//   };
+  const handleAddHours = async () => {
+    setError(null);
+    try {
+      await addHours({
+        minutes: hours() * 60,
+      });
+      location.reload()
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <div class="flex flex-col gap-2">
@@ -29,7 +32,7 @@ export default function AddHoursForm() {
             onChange={(e) => setHours(e.currentTarget.valueAsNumber)}
             min={0}
           />
-          <button class="btn btn-primary" onClick={async () => { handleAddHours }}>
+          <button class="btn btn-primary" onClick={handleAddHours}>
             Add Hours
           </button>
         </div>

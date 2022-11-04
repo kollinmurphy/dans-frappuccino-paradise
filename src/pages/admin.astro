@@ -19,41 +19,43 @@ const ingredients = await getIngredients({ hidden: true });
 const storeBalance = await getConfig(CONFIG_STORE_BALANCE, 0);
 const storeBalanceString = numToPrice(storeBalance);
 
-const hours = (await db.Hours.findAll({
-  where: {
-    paid: false,
-  },
-  include: [
-    {
-      model: db.Account,
-      attributes: ["id", "username"],
+const hours = (
+  await db.Hours.findAll({
+    where: {
+      paid: false,
     },
-  ],
-})) as unknown as Hours[];
+    include: [
+      {
+        model: db.Account,
+        attributes: ["id", "username"],
+      },
+    ],
+  })
+).map((h) => h.get({ plain: true })) as unknown as Hours[];
 ---
 
 <Layout title="Admin">
-  <div class='max-w-[1024px]'>
+  <div class="max-w-[1024px]">
     <h2 class="text-4xl mt-6 mb-2">
       Hey there, {account.username}! Welcome to the manager page.
     </h2>
-  
+
     <div class="text-xl">
       Current store balance: <span class="font-bold">{storeBalanceString}</span>
     </div>
-  
+
     <LoanRequest client:idle />
-  
+
     <div class="divider"></div>
-  
+
     <Payroll client:idle hours={hours} />
     <div class="divider"></div>
-  
+
     <div class="overflow-x-auto">
       <Inventory client:idle ingredients={ingredients} />
     </div>
     <div class="divider"></div>
-  
+
     <UserRoleForm client:idle />
   </div>
 </Layout>

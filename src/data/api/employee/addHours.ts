@@ -1,15 +1,14 @@
 import runApiCall from "..";
 
 const addHours = async (data: {
-  hoursId: number;
-  userId?: number;
+  minutes: number;
 }): Promise<any> =>
   runApiCall(
     {
-      method: "PATCH",
-      path: `/hours/${data.hoursId}`,
+      method: "POST",
+      path: '/employee/hours',
     },
-    { userId: data.userId }
+    { minutes: data.minutes }
   );
 
 export default addHours;

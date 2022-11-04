@@ -19,7 +19,7 @@ export default function Payroll(props: Props) {
     const data = props.hours.reduce((map, hour) => {
       if (!map.has(hour.accountId)) {
         return map.set(hour.accountId, {
-          username: hour.account.username,
+          username: hour.Account.username,
           minutes: hour.minutesWorked,
           payRate: PAY_RATE * 60,
           pay: PAY_RATE * hour.minutesWorked,

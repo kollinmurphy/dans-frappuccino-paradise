@@ -5,7 +5,7 @@ export type Hours = {
   paid: boolean;
   createdAt: Date;
   updatedAt: Date;
-  account: {
+  Account: {
     id: number;
     username: string;
   };
