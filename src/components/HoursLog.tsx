@@ -12,27 +12,6 @@ type Props = {
 
 const PAY_RATE = 15 / 60;
 
-const handleLogHours = async () => {
-  setError(null);
-  try {
-    const order = await createOrder(selectedUser());
-    await addProductToOrder({
-      orderId: order.id,
-      productId: props.product.id,
-      size: size(),
-      ingredients: ingredients().map((i) => ({
-        ingredientId: i.id,
-        quantity: i.quantity,
-      })),
-      userId: selectedUser(),
-    });
-    await placeOrder({ orderId: order.id, userId: selectedUser() });
-    if (selectedUser()) window.location.href = "/menu";
-    else window.location.href = "/account?purchased=true";
-  } catch (err) {
-    setError(err.message);
-  }
-};
 
 
 
