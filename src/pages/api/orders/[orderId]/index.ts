@@ -43,7 +43,7 @@ type PlaceOrderInput = {
   userId?: number;
 };
 
-const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
+export const placeOrder: AuthorizedHandler<PlaceOrderInput> = async ({
   params,
   user,
   body,
