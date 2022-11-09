@@ -22,30 +22,24 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 	6. There are three distinct Account Roles: User, Employee, and Manager
 2. **Placing an Order**
 	1. An authenticated Account \(“the Account”\) is presented with a list of all Products, each with an image and a price
-	2. When the Account selects a Product, they are taken to a Product page which lists the Visible ProductIngredients, each with a quantity, and a size selector, from which they can choose Mini \(8 oz\), Medium \(16 oz\), Massive \(24 oz\)
+	2. When the Account selects a Product, they are taken to a Product page which lists the Visible ProductIngredients, each with a quantity, and a size selector, from which they can choose Small \(8 oz\), Medium \(16 oz\), Large \(24 oz\)
 		1. Changing the Size will modify the count of each ProductIngredient by a scale of 1x \(Small\), 2x \(Medium\), or 3x \(Large\), which will in turn affect the item price
-		2. The Account cannot remove default ProductIngredients from the item
-		3. The Account can add new ProductIngredients to the item, and remove those items which they have added
-		4. The Account can click an Add To Order button which will do the following:
-			1. Create an Order if there is no unpaid order for the associated Account
-			2. Add an OrderProduct to the Order
-			3. Add any applicable OrderAddOns to the OrderProducts
-	3. The Product Page has a Place Order button
-		1. Following a successful purchase, the User is directed to the Accounts page that shows recent Orders and the current fulfillment status of the Order
-		2. Employees can order on behalf of another User on this page
+		2. The Account can add new ProductIngredients to the item, and remove ProductIngredients from the item
+		3. The Account can click a Place Order button which will do the following:
+		  1. Create an Order if there is no unpaid order for the associated Account
+		  2. Add an OrderProduct to the Order
+		  3. Add any applicable OrderAddOns to the OrderProducts
+		  4. Place the Order
+		  5. Redirect them to their Account page, where they can see recent Orders and their current fulfillment status
+		4. Employees can order on behalf of another User on this page by searching for them by their username
 3. **User Home**
 	1. The User Home is accessible by an Account of any Role
 	2. This page presents the user with a list of their orders, sorted by createdAt descending
-		1. OrderProducts are listed below each order
-		2. There is a dropdown menu next to each OrderProduct, which presents some options to:
-		   1. Favorite it, which will automatically add it the favorite orders on the same page
-		   2. Cancel the order, which will refund the money to their account and mark the order as cancelled
+	  1. OrderProducts are listed below each order
+	  2. There is a dropdown button next to the order which allows the user to reorder it with the click of a button
 	3. This page also presents a numeric entry from which the user can add funds to their Balance
-	4. This page also has a list of favorite drinks, which can be easily reordered
-		1. When an Order is favorited / unfavorited, this list should dynamically update
 4. **Employee Home**
 	1. The Employee Home is accessible by an Employee or a Manager
-	2. Can make an Order on behalf of an Account by searching their username
 	3. Marks Orders as fulfilled
 	4. Able to log their Hours
 5. **Manager Home**
@@ -55,9 +49,6 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 		1. Employees are paid a flat rate of $15 / hr
 	4. Can order inventory items, which increases the QuantityOnHand for the ProductIngredient, deducts from the Store Balance, and creates a Transaction
 	5. Can change the percentPriceModifier, smallBasePrice, mediumBasePrice, largeBasePrice
-	6. Has access to a table that displays all Products, each with a bulleted list of its ingredients, the cost of each, a total calculated price, and a delete button
-		1. Deleting a Product adds an isDeleted flag to the model to prevent destroying current and past orders
-	7. Can create new Products with a form to input the Product Name, Image Url, a list of all ProductIngredients with checkboxes to make them toggle\-able, a dynamically calculated price, and a submit button which creates the new Product and its associated ProductIngredients
 	8. Can create Employees by assigning them a username and a password
 	9. Can delete Employees or demote them to User
 
@@ -73,15 +64,17 @@ By giving all users an easy way to get what they need out of Dan’s Frappuccino
 	2. The price of an Order is the sum of all of its OrderProducts
 	
 	3. Failure conditions of an order
-	  1. Whenever an Order fails to be paid, it should not be deleted or modified
-	  2. When the Account’s Balance is less than the calculated Order total, an error message is displayed informing the user that they have insufficient funds
+	
+	   1. Whenever an Order fails to be paid, it should not be deleted or modified
+	   2. When the Account’s Balance is less than the calculated Order total, an error message is displayed informing the user that they have insufficient funds
 	
 	4. Actions to take upon successful payment
-	  1. A Transaction is created
-	  2. The Account’s Balance is deducted by the Order Price
-	  3. The Order is marked as Paid
-	  4. The QuantityOnHand is decremented for each ProductIngredient and each OrderAddOn
-	  	1. The quantity to deduct is scaled by the Product size: 1 for small, 2 for medium, 3 for large
+	
+	   1. A Transaction is created
+	   2. The Account’s Balance is deducted by the Order Price
+	   3. The Order is marked as Paid
+	   4. The QuantityOnHand is decremented for each ProductIngredient and each OrderAddOn
+	   5. The quantity to deduct is scaled by the Product size: 1 for small, 2 for medium, 3 for large
 	
 7. **The project will employ a database with the following entities (see UML diagrams for more information):**
 	

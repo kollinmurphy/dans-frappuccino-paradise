@@ -44,6 +44,12 @@ export class NotFoundError extends HttpError {
   }
 }
 
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "*",
+  "Access-Control-Allow-Headers": "*",
+};
+
 const wrapper: (handler: Handler<any>) => APIRoute =
   (handler) =>
   async ({ request, params }) => {
@@ -57,17 +63,21 @@ const wrapper: (handler: Handler<any>) => APIRoute =
         body,
       });
       if (!result)
-        return new Response(JSON.stringify({ success: true }), { status: 200 });
-      return new Response(JSON.stringify(result), { status: 200 });
+        return new Response(JSON.stringify({ success: true }), {
+          status: 200,
+          headers,
+        });
+      return new Response(JSON.stringify(result), { status: 200, headers });
     } catch (err) {
       if (err instanceof HttpError)
         return new Response(JSON.stringify({ error: err.message }), {
           status: err.statusCode,
+          headers,
         });
       console.error(err);
       return new Response(
         JSON.stringify({ error: "Something unexpected happened." }),
-        { status: 500 }
+        { status: 500, headers }
       );
     }
   };
@@ -89,17 +99,24 @@ export const authorizedWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
         user,
       });
       if (!result)
-        return new Response(JSON.stringify({ success: true }), { status: 200 });
-      return new Response(JSON.stringify(result), { status: 200 });
+        return new Response(JSON.stringify({ success: true }), { status: 200, headers });
+      return new Response(JSON.stringify(result), {
+        status: 200,
+        headers,
+      });
     } catch (err) {
       if (err instanceof HttpError)
         return new Response(JSON.stringify({ error: err.message }), {
           status: err.statusCode,
+          headers,
         });
       console.error(err);
       return new Response(
         JSON.stringify({ error: "Something unexpected happened." }),
-        { status: 500 }
+        {
+          status: 500,
+          headers,
+        }
       );
     }
   };
@@ -125,17 +142,21 @@ export const employeeWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
         user,
       });
       if (!result)
-        return new Response(JSON.stringify({ success: true }), { status: 200 });
-      return new Response(JSON.stringify(result), { status: 200 });
+        return new Response(JSON.stringify({ success: true }), {
+          status: 200,
+          headers,
+        });
+      return new Response(JSON.stringify(result), { status: 200, headers });
     } catch (err) {
       if (err instanceof HttpError)
         return new Response(JSON.stringify({ error: err.message }), {
           status: err.statusCode,
+          headers,
         });
       console.error(err);
       return new Response(
         JSON.stringify({ error: "Something unexpected happened." }),
-        { status: 500 }
+        { status: 500, headers }
       );
     }
   };
@@ -161,17 +182,21 @@ export const adminWrapper: (handler: AuthorizedHandler<any>) => APIRoute =
         user,
       });
       if (!result)
-        return new Response(JSON.stringify({ success: true }), { status: 200 });
-      return new Response(JSON.stringify(result), { status: 200 });
+        return new Response(JSON.stringify({ success: true }), {
+          status: 200,
+          headers,
+        });
+      return new Response(JSON.stringify(result), { status: 200, headers });
     } catch (err) {
       if (err instanceof HttpError)
         return new Response(JSON.stringify({ error: err.message }), {
           status: err.statusCode,
+          headers,
         });
       console.error(err);
       return new Response(
         JSON.stringify({ error: "Something unexpected happened." }),
-        { status: 500 }
+        { status: 500, headers }
       );
     }
   };

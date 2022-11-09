@@ -15,6 +15,8 @@ const SignUpForm = () => {
       const password = passwordField?.value
       if (!username || !password)
         throw new Error('Please enter a username and a password.')
+      if (password.length < 8)
+        throw new Error('Password must be at least 8 characters long.')
       const account = await createAccount({ username, password })
       document.cookie = `token=${account.token};path=/;`
       window.location.href= '/account'
