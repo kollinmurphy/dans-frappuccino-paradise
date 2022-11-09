@@ -4,7 +4,7 @@ import addHours from "@data/api/employee/addHours";
 import { numToPrice } from "@utils/strings";
 import { Order } from "@data/types/order";
 import { Hours } from "@data/types/hours"
-import { Show } from "solid-js";
+import { For, Show } from "solid-js";
 
 type Props = {
   hours: Hours[];
@@ -42,6 +42,7 @@ export default function Payroll(props: Props) {
             <th>Hours</th>
             <th>Pay Rate</th>
             <th>Total Earned</th>
+            <th>Paid</th>
           </tr>
         </thead>
         <tbody>
@@ -50,13 +51,16 @@ export default function Payroll(props: Props) {
               <td colspan={4}>No hours logged</td>
             </tr>
           )}>
-            {data().map((row) => (
-              <tr>
-                <td>{row.minutes / 60}</td>
-                <td>{numToPrice(row.payRate)}</td>
-                <td>{numToPrice(row.pay)}</td>
-              </tr>
-            ))}
+            <For each={props.hours.reverse()}>
+              {(hour) => (
+                <tr>
+                  <td>{hour.minutesWorked / 60}</td>
+                  <td>{numToPrice(PAY_RATE * 60)} / hr</td>
+                  <td>{numToPrice(PAY_RATE * hour.minutesWorked)}</td>
+                  <td>{hour.paid ? "Yes" : "No"}</td>
+                </tr>
+              )}
+            </For>
           </Show>
         </tbody>
       </table>

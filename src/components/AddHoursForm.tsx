@@ -21,7 +21,7 @@ export default function AddHoursForm() {
   };
 
   return (
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2 mt-4">
       <div class="flex flex-row gap-2 items-center">
         <span>Hours to add:</span>
         <div class="flex flex-row items-center gap-1">
