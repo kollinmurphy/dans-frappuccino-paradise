@@ -13,8 +13,6 @@ type Props = {
 const PAY_RATE = 15 / 60;
 
 
-
-
 export default function Payroll(props: Props) {
   const data = () => {
     const data = props.hours.reduce((map, hour) => {
