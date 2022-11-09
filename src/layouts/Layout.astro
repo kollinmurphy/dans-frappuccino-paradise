@@ -24,7 +24,7 @@ const availablePages = pages.filter((p) => {
   return p.roles === "*" || p.roles.includes(account.role);
 });
 
-export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost";
+export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost text-white";
 ---
 
 <style is:global>
@@ -54,7 +54,7 @@ export const BUTTON_CLASSES = "btn btn-accent btn-xs btn-ghost";
           class="w-full min-h-[92px] bg-primary flex flex-row items-end justify-between p-2 drop-shadow-[0_0px_10px_rgba(0,0,0,0.75)]"
         >
           <a href="/">
-            <h1 class="text-xl md:text-2xl lg:text-5xl text-accent text-white" style="font-family: 'Bebas Neue', cursive;">
+            <h1 class="text-xl md:text-2xl lg:text-5xl text-white" style="font-family: 'Bebas Neue', cursive;">
               Dan's Frappuccino Paradise
             </h1>
           </a>

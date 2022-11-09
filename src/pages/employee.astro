@@ -43,11 +43,12 @@ if (!account || account.role === 'user')
 ---
 
 <Layout title='Employee'>
-  <div class='max-w'>
-    <AddHoursForm  client:idle />
-
+  <div class='max-w-[1024px]'>
+    <h2 class="text-4xl mt-6 mb-2">
+      Hey there, {account.username}! Welcome to the employee page.
+    </h2>
     <HoursLog client:idle hours={hours.map(o => o.get({ plain: true })) as unknown as Array<Hours>} />
-    
+    <AddHoursForm  client:idle />
     <UnfulfilledOrders client:idle orders={orders.map(o => o.get({ plain: true })) as unknown as Array<OrderModel>} />
   </div>
   
