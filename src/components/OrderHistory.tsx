@@ -5,7 +5,7 @@ import createOrder from "@data/api/orders/create";
 import placeOrder from "@data/api/orders/placeOrder";
 import { Order } from "@data/types/order";
 import { numToPrice } from "@utils/strings";
-import { createSignal } from "solid-js";
+import { createSignal, For } from "solid-js";
 import ErrorAlert from "./ErrorAlert";
 
 type Props = {
@@ -57,7 +57,8 @@ export default function OrderHistory(props: Props) {
           </tr>
         </thead>
         <tbody>
-          {props.orders.map((order) => (
+          <For each={props.orders} fallback={<tr><td colspan={6}>No orders yet!</td></tr>}>
+            {(order) => (
             <tr>
               <td classList={makeClassList(order)}>#{order.id}</td>
               <td classList={makeClassList(order)} class='font-bold'>{order.status}</td>
@@ -86,7 +87,8 @@ export default function OrderHistory(props: Props) {
                 </button>
               </td>
             </tr>
-          ))}
+          )}
+          </For>
         </tbody>
       </table>
     </div>

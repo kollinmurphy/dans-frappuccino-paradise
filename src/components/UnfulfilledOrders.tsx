@@ -13,7 +13,7 @@ export default function UnfulfilledOrders(props: Props) {
   return (
     <div>
       <h2 class="text-2xl my-4 font-bold">Order History</h2>
-      <table class="table table-zebra">
+      <table class="table table-zebra w-full">
         <thead>
           <tr>
             <th>Order</th>

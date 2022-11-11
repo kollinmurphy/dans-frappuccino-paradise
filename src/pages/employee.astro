@@ -48,7 +48,7 @@ if (!account || account.role === 'user')
       Hey there, {account.username}! Welcome to the employee page.
     </h2>
     <HoursLog client:idle hours={hours.map(o => o.get({ plain: true })) as unknown as Array<Hours>} />
-    <AddHoursForm  client:idle />
+    <AddHoursForm client:idle />
     <UnfulfilledOrders client:idle orders={orders.map(o => o.get({ plain: true })) as unknown as Array<OrderModel>} />
   </div>
   

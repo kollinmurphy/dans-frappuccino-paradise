@@ -24,10 +24,10 @@ export default function AddHoursForm() {
     <div class="flex flex-col gap-2 mt-4">
       <div class="flex flex-row gap-2 items-center">
         <span>Hours to add:</span>
-        <div class="flex flex-row items-center gap-1">
+        <div class="flex-1 flex flex-row items-center gap-1">
           <input
             type="number"
-            class="input input-bordered"
+            class="flex-1 input input-bordered"
             value={hours()}
             onChange={(e) => setHours(e.currentTarget.valueAsNumber)}
             min={0}
