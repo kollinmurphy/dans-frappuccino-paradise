@@ -10,12 +10,8 @@ This is a web app designed to facilitate multiple aspects of a standard coffee s
 - [Use Case Diagrams](docs/useCases.md)
 - [Class Diagrams](docs/classDiagram.md)
 - [Prototypes](docs/prototypes.md)
-
-
-### Prior Documentation
-
 - [Milestone 1 Combined Document](docs/milestone1.pdf)
-
+- [Standup Documents](docs/standups)
 
 ## Workspace Layout
 
