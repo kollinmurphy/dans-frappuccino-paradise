@@ -11,7 +11,9 @@ This is a web app designed to facilitate multiple aspects of a standard coffee s
 - [Class Diagrams](docs/classDiagram.md)
 - [Prototypes](docs/prototypes.md)
 - [Milestone 1 Combined Document](docs/milestone1.pdf)
-- [Standup Documents](docs/standups)
+- [Daily Standup Documents](docs/standups)
+- [Sprint Planning & Retrospective Documents](docs/sprints)
+- [Screen Capture Videos](docs/videos)
 
 ## Workspace Layout
 
