@@ -1,9 +1,8 @@
-
 # Dan's Frappuccino Paradise
 
 This is a web app designed to facilitate multiple aspects of a standard coffee shop experience in a digital environment.
 
-### Related Documentation
+### Documentation
 
 - [Project Plan](docs/projectPlan.md)
 - [Requirements Definition](docs/requirements.md)
@@ -14,6 +13,7 @@ This is a web app designed to facilitate multiple aspects of a standard coffee s
 - [Daily Standup Documents](docs/standups)
 - [Sprint Planning & Retrospective Documents](docs/sprints)
 - [Screen Capture Videos](docs/videos)
+- [Final Presentation](docs/presentation.pdf)
 
 ## Workspace Layout
 
