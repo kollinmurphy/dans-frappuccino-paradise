@@ -13,7 +13,8 @@ This is a web app designed to facilitate multiple aspects of a standard coffee s
 - [Daily Standup Documents](docs/standups)
 - [Sprint Planning & Retrospective Documents](docs/sprints)
 - [Screen Capture Videos](docs/videos)
-- [Final Presentation](docs/presentation.pdf)
+- [Final Presentation (pdf)](docs/presentation.pdf)
+- [Final Presentation (pptx)](docs/presentation.pptx)
 
 ## Workspace Layout
 
